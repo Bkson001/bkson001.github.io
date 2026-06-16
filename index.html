@@ -483,20 +483,25 @@ function googleTranslateElementInit() {
     }, 'google_translate_element');
 }
 
-// Counter Logic utilizing local memory storage to smoothly scale past 201
+// REAL CLOUD VISITOR TRACKER ENGINE
 function initBksonCounter() {
-    let localViews = localStorage.getItem('bkson_visit_count');
-    if (!localViews) {
-        localViews = 201; // Kick off number baseline
-    } else {
-        localViews = parseInt(localViews) + 1; // Increment step per refresh
-    }
-    localStorage.setItem('bkson_visit_count', localViews);
-    
-    const counterDisplay = document.getElementById('bkson-counter');
-    if (counterDisplay) {
-        counterDisplay.innerText = localViews;
-    }
+    // This fetches a real live number from a global web server room assigned to your username
+    fetch('https://count.getloli.com/get/@bkson001_official_count')
+    .then(res => res.json())
+    .then(data => {
+        // This takes the real world count and adds your baseline 201 start point smoothly!
+        const globalViews = data.value + 201;
+        
+        const counterDisplay = document.getElementById('bkson-counter');
+        if (counterDisplay) {
+            counterDisplay.innerText = globalViews;
+        }
+    })
+    .catch(err => {
+        console.log("Server lag, using local fallback");
+        // Fallback display if network lags slightly
+        document.getElementById('bkson-counter').innerText = "201";
+    });
 }
 </script>
 <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
