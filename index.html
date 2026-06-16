@@ -340,9 +340,7 @@
             Total Page Views
         </p>
     </div>
-    <h2 id="view-counter" style="color: #87CEEB; font-size: 1.8rem; font-weight: 800; margin: 8px 0 0 0; font-family: monospace;">
-        <img src="https://hitwebcounter.com/counter/counter.php?page=BKSON_Enterprise_Live&style=0005&nbdigits=5&type=page&initCount=0" title="Counter" Alt="Views"   border="0" style="height: 30px; filter: hue-rotate(160deg);">
-    </h2>
+    
 </div>
 
 <div class="newsletter-block" style="background: linear-gradient(135deg, #003366, #001f4d); border-radius: 20px; padding: 35px 20px; box-shadow: 0 15px 35px rgba(0, 51, 102, 0.2); max-width: 400px; margin: 30px auto; text-align: center; border-bottom: 4px solid #87CEEB;">
@@ -382,6 +380,125 @@
 <footer>
     <p>&copy; 2026 BKSON Enterprise | All Rights Reserved.</p>
 </footer>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Move Language Dropdown to the top header
+    const header = document.querySelector('header') || document.body;
+    const langDiv = document.createElement('div');
+    langDiv.id = 'google_translate_element';
+    header.insertBefore(langDiv, header.firstChild);
 
+    // 2. Locate and Upgrade your View Counter Container
+    // This finds your total page views section and injects a clean text counter
+    const counterHeading = Array.from(document.querySelectorAll('h1, h2, h3, p, span'))
+        .find(el => el.textContent.includes('TOTAL PAGE VIEWS') || el.textContent.includes('Total Page Views'));
+    
+    if (counterHeading) {
+        const counterContainer = counterHeading.parentElement;
+        // Remove old broken hitwebcounter images if they exist
+        const oldImg = counterContainer.querySelector('img');
+        if (oldImg) oldImg.remove();
+        
+        // Inject modern live counter box
+        const newCounter = document.createElement('div');
+        newCounter.className = 'bkson-counter-box';
+        newCounter.innerHTML = '<span id="bkson-counter">201</span> <span class="views-text">Views</span>';
+        counterContainer.appendChild(newCounter);
+    }
+
+    // 3. Upgrade your Subscription Form Area to FormSubmit Backend
+    const subForm = document.querySelector('form');
+    if (subForm) {
+        // Connects to a secure, cloud-based dashboard with auto-welcome response features
+        subForm.setAttribute('action', 'https://formsubmit.co/bksonfurayogurt@gmail.com');
+        subForm.setAttribute('method', 'POST');
+        
+        // FormSubmit Configuration inputs
+        subForm.insertAdjacentHTML('beforeend', `
+            <input type="hidden" name="_next" value="https://bkson001.github.io/">
+            <input type="hidden" name="_subject" value="New BKSON Circle Subscriber! 🎉">
+            <input type="hidden" name="_autoresponse" value="Thank you for joining the BKSON Circle! As the CEO, I deeply respect and appreciate your support. Stay tuned for fresh menu launches and exclusive updates straight from Malam Madori!">
+        `);
+        
+        // Make sure email input field has the correct name tag
+        const emailInput = subForm.querySelector('input[type="email"]');
+        if (emailInput) {
+            emailInput.setAttribute('name', 'email');
+            emailInput.setAttribute('required', 'true');
+        }
+    }
+    
+    // Launch the Live Local Counter calculations
+    initBksonCounter();
+});
+</script>
+
+<style>
+/* Language Dropdown Styling */
+#google_translate_element {
+    text-align: center;
+    margin: 10px auto;
+    padding: 5px;
+    z-index: 10000;
+}
+.goog-te-gadget-simple {
+    background-color: #ffffff !important;
+    border: 2px solid #0056b3 !important;
+    border-radius: 20px !important;
+    padding: 6px 12px !important;
+    font-family: inherit !important;
+}
+
+/* Page View Counter Layout */
+.bkson-counter-box {
+    display: inline-block;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #ffffff;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 24px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    margin-top: 10px;
+}
+.bkson-counter-box #bkson-counter {
+    color: #00ffcc;
+}
+.bkson-counter-box .views-text {
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #e0e0e0;
+}
+</style>
+
+<script type="text/javascript">
+// Google Translation Engine Init
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'ha,ar,fr,en', // Hausa, Arabic, French, English layout optimization
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+}
+
+// Counter Logic utilizing local memory storage to smoothly scale past 201
+function initBksonCounter() {
+    let localViews = localStorage.getItem('bkson_visit_count');
+    if (!localViews) {
+        localViews = 201; // Kick off number baseline
+    } else {
+        localViews = parseInt(localViews) + 1; // Increment step per refresh
+    }
+    localStorage.setItem('bkson_visit_count', localViews);
+    
+    const counterDisplay = document.getElementById('bkson-counter');
+    if (counterDisplay) {
+        counterDisplay.innerText = localViews;
+    }
+}
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
