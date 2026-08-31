@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛒 BKSON Order & Secure Pay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --mp-blue: #87CEEB;
+            --mp-dark: #003366;
+            --mp-gray: #f0faff;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--mp-gray);
+            margin: 0;
+            padding: 20px;
+            color: var(--mp-dark);
+        }
+        .container {
+            max-width: 700px;
+            margin: 20px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 51, 102, 0.1);
+        }
+        h2 { color: var(--mp-dark); text-align: center; text-transform: uppercase; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #bce3f7; border-radius: 8px; box-sizing: border-box; font-size: 0.95rem; outline: none; }
+        
+        /* Clickable Guide Button & Modal Styling */
+        .guide-btn {
+            background: #eaf6fc;
+            border: 2px dashed var(--mp-dark);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--mp-dark);
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: 0.2s;
+        }
+        .guide-btn:hover { background: #d0ebfb; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 85%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .modal-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+        }
+        .modal-item:hover { background: #f0faff; color: #27ae60; font-weight: bold; }
+        .close-modal { float: right; cursor: pointer; font-size: 1.2rem; color: red; }
+
+        .btn {
+            background: #27ae60; color: white; border: none; padding: 14px;
+            border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%;
+            font-size: 1rem; letter-spacing: 1px; text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.2); transition: 0.2s; margin-top: 10px;
+        }
+        .btn:hover { background: #219653; }
+
+        .paystack-box {
+            background: #e8f8f0; border: 1px solid #27ae60; padding: 12px;
+            border-radius: 8px; margin-bottom: 15px; font-size: 0.85rem; color: #1e6b3c; text-align: center;
+        }
+
+        /* --- PROFESSIONAL RECEIPT STYLING --- */
+        #receiptSection {
+            display: none; background: #ffffff; border: 1px solid #d0e8f5;
+            padding: 25px; border-radius: 8px; margin-top: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .receipt-top-banner {
+            background: #003366; color: white; padding: 15px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-radius: 6px; margin-bottom: 20px;
+        }
+        .receipt-top-banner h3 { margin: 0; font-size: 1.4rem; letter-spacing: 1px; color: white; }
+        .receipt-logo { width: 50px; height: 50px; border-radius: 8px; object-fit: cover; border: 2px solid white; background: white; }
+        .section-header-bar { background: #87CEEB; color: #003366; padding: 6px 12px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; margin-bottom: 12px; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; font-size: 0.9rem; }
+        .info-row { display: flex; justify-content: space-between; margin-bottom: 6px; border-bottom: 1px solid #f0faff; padding-bottom: 4px; }
+        .receipt-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.9rem; }
+        .receipt-table th { background: #e0f4ff; color: #003366; padding: 8px; text-align: left; font-size: 0.85rem; }
+        .receipt-table td { padding: 10px 8px; border-bottom: 1px solid #eee; }
+        .totals-section { display: flex; justify-content: space-between; margin-top: 15px; border-top: 2px solid #003366; padding-top: 10px; }
+        .totals-left { font-size: 0.9rem; color: #555; }
+        .totals-right { text-align: right; font-size: 0.95rem; }
+        .totals-right div { margin-bottom: 5px; }
+        .grand-total { font-size: 1.2rem; font-weight: bold; color: #003366; }
+        .receipt-footer-banner { background: #003366; color: white; text-align: center; padding: 10px; font-size: 0.75rem; border-radius: 6px; margin-top: 25px; line-height: 1.4; }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: var(--mp-dark); text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>🛒 BKSON Order & Secure Pay</h2>
+        <p style="text-align: center; color: #666; font-size: 0.85rem; margin-bottom: 15px;">Select your branch, pick from our available list or type your order, and pay securely.</p>
+
+        <div class="paystack-box">
+            <i class="fas fa-shield-alt"></i> <strong>Paystack Secure Checkout Active:</strong> Direct merchant payment integration.
+        </div>
+
+        <form id="orderForm" onsubmit="processOrder(event)">
+            
+            <div class="form-group">
+                <label>Select Branch Location</label>
+                <select id="branchSelect" required>
+                    <option value="malam-madori">BKSON Malam Madori (Jigawa HQ)</option>
+                    <option value="hadejia">BKSON Hadejia Branch (Jigawa)</option>
+                    <option value="dutse">BKSON Dutse Branch (Jigawa)</option>
+                    <option value="kano">BKSON Kano Branch</option>
+                </select>
+            </div>
+
+            <div class="guide-btn" onclick="openMenuModal()">
+                📋 Click to View Available Drinks & Price Guide
+            </div>
+
+            <div class="form-group">
+                <label>Drink / Product Name</label>
+                <input type="text" id="customDrinkInput" placeholder="Click guide above or type item name..." required>
+            </div>
+
+            <div class="form-group">
+                <label>Unit Price (₦)</label>
+                <input type="number" id="unitPriceInput" placeholder="Auto-fills from guide or type price..." min="50" required oninput="updateTotal()">
+            </div>
+
+            <div class="form-group">
+                <label>Quantity</label>
+                <input type="number" id="qtyInput" value="1" min="1" max="100" required oninput="updateTotal()">
+            </div>
+
+            <div class="form-group">
+                <label>Your Full Name</label>
+                <input type="text" id="custName" placeholder="e.g. Ibrahim Malam" required>
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number (For Delivery Safety & Contact)</label>
+                <input type="tel" id="custPhone" placeholder="e.g. 08165836740" required>
+            </div>
+
+            <div class="form-group">
+                <label>Delivery Address / Street</label>
+                <input type="text" id="custAddress" placeholder="e.g. Abuja Quaters / Zoo Road" required>
+            </div>
+
+            <div style="background: #f0faff; padding: 12px; border-radius: 8px; text-align: center; margin-bottom: 15px;">
+                <span style="font-size: 0.9rem; color: #555;">Total Amount to Pay:</span>
+                <div id="totalDisplay" style="font-size: 1.4rem; font-weight: bold; color: var(--mp-dark);">₦0</div>
+            </div>
+
+            <button type="submit" class="btn"><i class="fas fa-credit-card"></i> Pay Securely via Paystack & Get Receipt</button>
+        </form>
+
+        <div id="menuModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeMenuModal()">&times;</span>
+                <h3 style="color: #003366; margin-top: 0; font-size: 1.1rem;">Available Drinks Menu</h3>
+                <p style="font-size: 0.8rem; color: #666;">Tap any item to auto-fill it:</p>
+                <div id="modalProductList">
+                    </div>
+            </div>
+        </div>
+
+        <div id="receiptSection">
+            <div class="receipt-top-banner">
+                <div>
+                    <h3>Delivery Receipt</h3>
+                    <p id="recBranchTitle" style="margin: 2px 0 0 0; font-size: 0.75rem; color: #e0f4ff;">BKSON FURA & DRINKS SERVICES</p>
+                </div>
+                <img src="Company-logo.png" alt="BKSON Logo" class="receipt-logo">
+            </div>
+
+            <div class="section-header-bar">Customer & Delivery Information</div>
+            <div class="info-grid">
+                <div>
+                    <div class="info-row"><span><strong>Name:</strong></span> <span id="recName">-</span></div>
+                    <div class="info-row"><span><strong>Phone:</strong></span> <span id="recPhone">-</span></div>
+                    <div class="info-row"><span><strong>Address:</strong></span> <span id="recAddress">-</span></div>
+                </div>
+                <div>
+                    <div class="info-row"><span><strong>Receipt No:</strong></span> <span id="recNo">BK-001</span></div>
+                    <div class="info-row"><span><strong>Delivery Date:</strong></span> <span id="recDate">-</span></div>
+                    <div class="info-row"><span><strong>Gateway:</strong></span> <span style="color: #27ae60; font-weight: bold;">Paystack Verified</span></div>
+                </div>
+            </div>
+
+            <div class="section-header-bar">Order Details</div>
+            <table class="receipt-table">
+                <thead>
+                    <tr>
+                        <th>Item Description</th>
+                        <th>Qty</th>
+                        <th>Unit Price</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="recProduct">-</td>
+                        <td id="recQty">-</td>
+                        <td id="recUnitPrice">-</td>
+                        <td id="recItemTotal">-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="totals-section">
+                <div class="totals-left">
+                    <p style="margin: 0 0 5px 0;"><strong>Estimated Delivery:</strong></p>
+                    <p id="recTime" style="margin: 0; color: #003366; font-weight: bold;">-</p>
+                    <p style="margin: 15px 0 0 0; font-size: 0.8rem; color: #27ae60; font-weight: bold;">✓ Cooling 24/7 Guaranteed</p>
+                </div>
+                <div class="totals-right">
+                    <div>Subtotal: <span id="recSubtotal" style="font-weight: bold;">-</span></div>
+                    <div>Delivery Charge: <strong style="color: #27ae60;">FREE</strong></div>
+                    <div class="grand-total">Total Paid: <span id="recTotal">-</span></div>
+                </div>
+            </div>
+
+            <div id="recFooterAddress" class="receipt-footer-banner"></div>
+            <button onclick="window.print()" style="background: #003366; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; margin-top: 20px; cursor: pointer; font-weight: bold;">🖨️ Print / Save Receipt</button>
+        </div>
+
+        <a href="index.html" class="back-link">← Return to Homepage</a>
+    </div>
+
+    <script>
+        // Load default products if none exist in browser storage yet
+        function getProducts() {
+            let saved = localStorage.getItem('bkson_admin_products');
+            if (saved) {
+                return JSON.parse(saved);
+            }
+            return [
+                { name: "Pop Cola Drink", price: 250 },
+                { name: "Coca Cola / Chilled Soft Drink", price: 500 },
+                { name: "BKSON Standard Fura Yogurt", price: 1000 },
+                { name: "Exotic / Premium Large Pack", price: 1500 }
+            ];
+        }
+
+        function openMenuModal() {
+            const listContainer = document.getElementById('modalProductList');
+            listContainer.innerHTML = "";
+            const products = getProducts();
+
+            if(products.length === 0) {
+                listContainer.innerHTML = "<p style='color:red; text-align:center;'>No drinks currently active.</p>";
+            }
+
+            products.forEach(item => {
+                let div = document.createElement('div');
+                div.className = 'modal-item';
+                div.innerHTML = `<span>${item.name}</span> <strong style="color: #003366;">₦${item.price.toLocaleString()}</strong>`;
+                div.onclick = function() {
+                    document.getElementById('customDrinkInput').value = item.name;
+                    document.getElementById('unitPriceInput').value = item.price;
+                    updateTotal();
+                    closeMenuModal();
+                };
+                listContainer.appendChild(div);
+            });
+
+            document.getElementById('menuModal').style.display = 'block';
+        }
+
+        function closeMenuModal() {
+            document.getElementById('menuModal').style.display = 'none';
+        }
+
+        function updateTotal() {
+            const price = parseFloat(document.getElementById('unitPriceInput').value) || 0;
+            const qty = parseInt(document.getElementById('qtyInput').value) || 1;
+            const total = price * qty;
+            document.getElementById('totalDisplay').innerText = '₦' + total.toLocaleString();
+        }
+
+        function processOrder(e) {
+            e.preventDefault();
+
+            const branch = document.getElementById('branchSelect').value;
+            const productName = document.getElementById('customDrinkInput').value;
+            const price = parseFloat(document.getElementById('unitPriceInput').value);
+            const qty = document.getElementById('qtyInput').value;
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const address = document.getElementById('custAddress').value;
+            const total = price * qty;
+
+            const randomId = 'BK-' + Math.floor(1000 + Math.random() * 9000);
+            const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            
+            let branchTitleText = "";
+            let footerAddressText = "";
+            let deliveryTimeText = "";
+
+            if (branch === 'hadejia') {
+                branchTitleText = "BKSON FURA & DRINKS - HADEJIA BRANCH";
+                footerAddressText = "Hadejia Branch, Jigawa State, Nigeria<br>Phone: 2348165836740 | Email: bksonfurayogurt@gmail.com | www.bkson001.github.io";
+                deliveryTimeText = "Within 30 - 45 Minutes (Hadejia Dispatch)";
+            } else if (branch === 'dutse') {
+                branchTitleText = "BKSON FURA & DRINKS - DUTSE BRANCH";
+                footerAddressText = "Dutse Metropolis Branch, Jigawa State, Nigeria<br>Phone: 2348165836740 | Email: bksonfurayogurt@gmail.com | www.bkson001.github.io";
+                deliveryTimeText = "Within 30 - 45 Minutes (Dutse Dispatch)";
+            } else if (branch === 'kano') {
+                branchTitleText = "BKSON FURA & DRINKS - KANO BRANCH";
+                footerAddressText = "Kano Metropolis Branch, Kano State, Nigeria<br>Phone: 2348165836740 | Email: bksonfurayogurt@gmail.com | www.bkson001.github.io";
+                deliveryTimeText = "Within 45 - 60 Minutes (Kano Dispatch)";
+            } else {
+                branchTitleText = "BKSON FURA & DRINKS - MALAM MADORI HQ";
+                footerAddressText = "Layin Y'an Rake Beside Airtel Service Abuja Quaters Malam Madori Jigawa Nigeria<br>Phone: 2348165836740 | Email: bksonfurayogurt@gmail.com | www.bkson001.github.io";
+                deliveryTimeText = "Within 30 - 45 Minutes (Malam Madori)";
+            }
+
+            document.getElementById('recBranchTitle').innerText = branchTitleText;
+            document.getElementById('recNo').innerText = randomId;
+            document.getElementById('recName').innerText = name;
+            document.getElementById('recPhone').innerText = phone;
+            document.getElementById('recAddress').innerText = address;
+            document.getElementById('recDate').innerText = today;
+            document.getElementById('recProduct').innerText = productName;
+            document.getElementById('recQty').innerText = qty;
+            document.getElementById('recUnitPrice').innerText = '₦' + price.toLocaleString();
+            document.getElementById('recItemTotal').innerText = '₦' + total.toLocaleString();
+            document.getElementById('recSubtotal').innerText = '₦' + total.toLocaleString();
+            document.getElementById('recTotal').innerText = '₦' + total.toLocaleString();
+            document.getElementById('recTime').innerText = deliveryTimeText;
+            document.getElementById('recFooterAddress').innerHTML = footerAddressText;
+
+            document.getElementById('orderForm').style.display = 'none';
+            document.getElementById('receiptSection').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
