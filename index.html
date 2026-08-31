@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
   <meta name="description" content="BKSON Drinks and Premium Fura Yogurt Company. Since 2011, serving traditional handcrafted premium Fura da Nono and refreshments.">
-<meta name="keywords" content="BKSON, BKSON fura, BKSON softdrinks, Bkson fura yogurt, fura da nono, drinks, softdrinks, Nigeria beverages, traditional drinks">
-<meta name="author" content="BKSON Fura & Drinks Services">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BKSON FURA AND DRINKS SERVICES</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta name="keywords" content="BKSON, BKSON fura, BKSON softdrinks, Bkson fura yogurt, fura da nono, drinks, softdrinks, Nigeria beverages, traditional drinks">
+  <meta name="author" content="BKSON Fura & Drinks Services">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BKSON FURA AND DRINKS SERVICES</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-<div class="ticker-wrap" style="position: fixed; bottom: 0; left: 0; z-index: 9999; width: 100%; background: #003366; overflow: hidden; white-space: nowrap; padding: 10px 0; box-shadow: 0 -4px 12px rgba(0,0,0,0.15); border-top: 2px solid #87CEEB;">
+<!-- TICKER AT THE VERY BOTTOM -->
+<div class="ticker-wrap" style="position: fixed; bottom: 0; left: 0; z-index: 9997; width: 100%; background: #003366; overflow: hidden; white-space: nowrap; padding: 10px 0; box-shadow: 0 -4px 12px rgba(0,0,0,0.15); border-top: 2px solid #87CEEB;">
     <marquee behavior="scroll" direction="left" scrollamount="6" style="color: white; font-family: sans-serif; font-size: 1rem; font-weight: bold; vertical-align: middle;">
         <span style="background: #87CEEB; color: #003366; padding: 2px 8px; border-radius: 4px; margin-right: 15px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">WELCOME TO BKSON FURA AND DRINKS SERVICES</span> 
         <span>🌟 "EST. 2011" Sip the freshness, taste the quality</span> 
@@ -20,16 +21,16 @@
     
     <style>
         :root {
-    --mp-blue: #87CEEB;   /* Official Sky Blue */
-    --mp-dark: #003366;   /* Deep Navy for readable text */
-    --mp-gray: #f0faff;   /* Very light blue-gray for backgrounds */
-    --whatsapp-green: #25D366;
-}
+            --mp-blue: #87CEEB;   /* Official Sky Blue */
+            --mp-dark: #003366;   /* Deep Navy for readable text */
+            --mp-gray: #f0faff;   /* Very light blue-gray for backgrounds */
+            --whatsapp-green: #25D366;
+        }
         body {
-          
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding-top: 80px; 
+            padding-bottom: 150px;
             background-color: white;
             color: var(--mp-dark);
         }
@@ -39,51 +40,111 @@
             position: fixed; top: 0; width: 100%; height: 80px;
             background: white; display: flex; justify-content: space-between;
             align-items: center; padding: 0 20px; box-sizing: border-box;
-           border-bottom: 3px solid var(--mp-blue); z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 3px solid var(--mp-blue); z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         .logo-container { display: flex; align-items: center; }
         .business-logo { width: 45px; height: 45px; border-radius: 10px; margin-right: 12px; object-fit: cover; }
         .brand-text h1 { font-size: 18px; margin: 0; letter-spacing: 1px; }
         .brand-text p { font-size: 11px; margin: 0; font-weight: bold; color: #777; }
 
-        /* ZOOMED CEO IMAGE */
+        /* CEO IMAGE */
        .hero { 
-    padding: 50px 20px; 
-    text-align: center; 
-    background-color: white; 
-    background-image: linear-gradient(to bottom, #ffffff, #e0f4ff); /* Soft sky fade */
-}
+            padding: 50px 20px; 
+            text-align: center; 
+            background-color: white; 
+            background-image: linear-gradient(to bottom, #ffffff, #e0f4ff);
+        }
         .ceo-frame {
-            width: 200px; /* Zoomed in more for CEO presence */
+            width: 200px; 
             height: 200px; 
             border-radius: 50px; 
             object-fit: cover; 
             object-position: top; 
-            margin-bottom: 20px; 
+            margin-bottom: 5px; 
             border: 6px solid white;
             box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
 
-        /* REAL WHATSAPP STICKY BUTTON */
+        /* CHANGE PHOTO BUTTON STYLING (PLACED RIGHT UNDERNEATH PHOTOS) */
+        .change-photo-container {
+            text-align: center;
+            margin: 6px 0 15px 0;
+        }
+        .change-photo-btn {
+            background: #003366;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            font-size: 0.72rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,51,102,0.2);
+            transition: background 0.2s;
+        }
+        .change-photo-btn:hover {
+            background: #27ae60;
+        }
+
+        /* WHATSAPP STICKY BUTTON (MOVED UP HIGHER) */
         .whatsapp-sticky {
             position: fixed;
-            bottom: 110px;
+            bottom: 130px;
             right: 20px;
             background-color: var(--whatsapp-green);
             color: white;
-            width: 45px;
-            height: 45px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-            z-index: 9999;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 9998;
             text-decoration: none;
-            font-size: 35px; /* Size of the icon */
-            transition: 0.3s;
+            font-size: 1.8rem;
+            transition: transform 0.2s;
         }
-        .whatsapp-sticky:hover { transform: scale(1.1); }
+        .whatsapp-sticky:hover { transform: scale(1.08); }
+
+        /* STICKY FLOATING MENU BUTTON (POSITIONED JUST ABOVE THE TICKER) */
+        .bkson-float-menu {
+            position: fixed; 
+            bottom: 60px; 
+            right: 20px; 
+            z-index: 9999;
+            display: flex; 
+            flex-direction: column; 
+            align-items: flex-end;
+        }
+        .bkson-float-btn {
+            background: #003366; color: white; border: none; width: 60px; height: 60px;
+            border-radius: 50%; box-shadow: 0 4px 15px rgba(0,51,102,0.4); cursor: pointer;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .bkson-float-btn:hover { transform: scale(1.08); background: #002244; }
+        .bkson-float-btn .emoji-icon { font-size: 1.1rem; line-height: 1; }
+        .bkson-float-btn .menu-text { font-size: 0.6rem; font-weight: bold; text-transform: uppercase; margin-top: 2px; letter-spacing: 0.5px; }
+
+        .bkson-menu-popup {
+            display: none; position: absolute; bottom: 70px; right: 0; background: white;
+            min-width: 210px; border-radius: 14px; box-shadow: 0 5px 25px rgba(0, 51, 102, 0.25);
+            border: 1px solid #d0e8f5; overflow: hidden; animation: fadeInUp 0.2s ease-in-out;
+        }
+        .bkson-menu-popup a {
+            display: flex; align-items: center; padding: 12px 16px; color: #003366;
+            text-decoration: none; font-size: 0.9rem; font-weight: bold;
+            border-bottom: 1px solid #f0faff; transition: background 0.2s;
+        }
+        .bkson-menu-popup a:last-child { border-bottom: none; }
+        .bkson-menu-popup a:hover { background: #f0faff; color: #27ae60; }
+        .bkson-menu-popup span { margin-right: 12px; font-size: 1.2rem; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         .section { padding: 40px 20px; max-width: 900px; margin: auto; }
         .fura-banner { width: 100%; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
@@ -93,123 +154,130 @@
     </style>
 </head>
 <body>
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // 1. Update CEO Photo if changed in admin
+    // 1. Update Logo Photo if changed
+    const savedLogo = localStorage.getItem('bkson_logo_img');
+    if (savedLogo) {
+        const logoElement = document.querySelector('.business-logo');
+        if (logoElement) logoElement.src = savedLogo;
+    }
+
+    // 2. Update CEO Photo if changed
     const savedCeoImg = localStorage.getItem('bkson_ceo_img');
     if (savedCeoImg) {
         const ceoImgElement = document.querySelector('.ceo-frame');
         if (ceoImgElement) ceoImgElement.src = savedCeoImg;
     }
 
-    // 2. Update Brand Title if changed in admin
+    // 3. Update Brand Title if changed
     const savedBrandTitle = localStorage.getItem('bkson_brand_title');
     if (savedBrandTitle) {
         const titleElement = document.querySelector('.brand-text h1');
         if (titleElement) titleElement.textContent = savedBrandTitle;
     }
 
-    // 3. Update CEO Bio text if changed in admin
+    // 4. Update CEO Bio text if changed
     const savedCeoBio = localStorage.getItem('bkson_ceo_bio');
     if (savedCeoBio) {
-        // Targets the first paragraph inside the CEO section card
         const bioParagraph = document.querySelector('.section .card p');
         if (bioParagraph) {
             bioParagraph.innerHTML = savedCeoBio;
         }
     }
 
-    // 4. Update Fura Banner image if changed in admin
+    // 5. Update Fura Banners if changed
     const savedFuraBanner = localStorage.getItem('bkson_fura_banner');
     if (savedFuraBanner) {
-        const bannerElement = document.querySelector('.fura-banner');
-        if (bannerElement) bannerElement.src = savedFuraBanner;
+        const bannerElements = document.querySelectorAll('.fura-banner');
+        if (bannerElements.length > 0) bannerElements[0].src = savedFuraBanner;
+    }
+
+    const savedBanner2 = localStorage.getItem('bkson_banner_2');
+    if (savedBanner2) {
+        const banner2Element = document.getElementById('displayBanner2');
+        if (banner2Element) banner2Element.src = savedBanner2;
+    }
+
+    const savedBanner3 = localStorage.getItem('bkson_banner_3');
+    if (savedBanner3) {
+        const banner3Element = document.getElementById('displayBanner3');
+        if (banner3Element) banner3Element.src = savedBanner3;
+    }
+
+    const savedDrinksBanner = localStorage.getItem('bkson_drinks_banner');
+    if (savedDrinksBanner) {
+        const drinksElement = document.getElementById('displayDrinksBanner');
+        if (drinksElement) drinksElement.src = savedDrinksBanner;
     }
 });
 </script>
-</style>
+
+<!-- HEADER WITH LOGO AND CHANGE LOGO BUTTON RIGHT UNDERNEATH IT -->
 <nav>
-    <div class="logo-container">
-        <img src="Company-logo.png" alt="Logo" class="business-logo">
-        <div class="brand-text">
-            <h1>BKSON</h1>
-            <p>FURA AND </br>DRINKS SERVICES</p>
+    <div class="logo-container" style="flex-direction: column; align-items: flex-start;">
+        <div style="display: flex; align-items: center;">
+            <img src="Company-logo.png" alt="Logo" class="business-logo">
+            <div class="brand-text">
+                <h1>BKSON</h1>
+                <p>FURA AND DRINKS</p>
+            </div>
+        </div>
+        <!-- Change Logo Button Right Underneath Logo -->
+        <div class="change-photo-container" style="margin: 4px 0 0 0;">
+            <button class="change-photo-btn" onclick="promptChangePhoto('bkson_logo_img', 'business-logo')">📷</button>
+            <input type="file" id="file_bkson_logo_img" style="display: none;" accept="image/*" onchange="uploadNewPhoto(event, 'bkson_logo_img', 'business-logo')">
         </div>
     </div>
-    <div style="font-size: 12px; font-weight: bold; padding-right: 15px;">Est. 2011
-    <br>Cooling 24/7
-    </div>
-</nav>
-<nav style="position: fixed; top: 0; width: 100%; height: 80px; background: white; display: flex; justify-content: space-between; align-items: center; padding: 0 15px; box-sizing: border-box; border-bottom: 3px solid var(--mp-blue); z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-    
-    <!-- LEFT: Logo & Brand Text -->
-    <div class="logo-container" style="display: flex; align-items: center;">
-        <img src="Company-logo.png" alt="Logo" class="business-logo" style="width: 40px; height: 40px; border-radius: 8px; margin-right: 8px; object-fit: cover;">
-        <div class="brand-text">
-            <h1 style="font-size: 16px; margin: 0; letter-spacing: 1px;">BKSON</h1>
-            <p style="font-size: 10px; margin: 0; font-weight: bold; color: #777;">FURA AND DRINKS</p>
-        </div>
-    </div>
-    
-    <!-- RIGHT: Est. 2011 text + Three Dots Popup Menu right where you marked -->
-    <div style="display: flex; align-items: center; gap: 8px;">
+
+    <div style="display: flex; align-items: center; gap: 10px;">
         <div style="font-size: 11px; font-weight: bold; text-align: right; line-height: 1.2; color: #003366;">
             Est. 2011
             <br><span style="color: #555;">Cooling 24/7</span>
         </div>
-
-        <!-- THREE DOTS POPUP MENU (Placed right next to Est. 2011) -->
-        <div class="menu-wrap" style="position: relative;">
-            <button onclick="toggleMenu()" style="background: transparent; border: none; color: #003366; font-size: 30px; font-weight: bold; cursor: pointer; padding: 0 5px; letter-spacing: 0px;" title="Menu">
-                &#8942;
-            </button>
-
-            <!-- THE POPUP DROPDOWN BOX -->
-            <div id="popupMenu" style="display: none; position: absolute; right: 0; top: 35px; background: white; width: 200px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,51,102,0.2); border: 1px solid #e0f4ff; overflow: hidden; z-index: 2000;">
-                <a href="branches.html" style="display: block; padding: 12px 15px; color: #003366; text-decoration: none; font-weight: bold; font-size: 14px; border-bottom: 1px solid #f0faff;">📍 Our Branches</a>
-                <a href="checkout.html" style="display: block; padding: 12px 15px; color: #003366; text-decoration: none; font-weight: bold; font-size: 14px; border-bottom: 1px solid #f0faff;">🛒 Order & Pay</a>
-                <a href="Admin.html" style="display: block; padding: 12px 15px; color: #003366; text-decoration: none; font-weight: bold; font-size: 14px; border-bottom: 1px solid #f0faff;">🔐 Admin Page</a>
-                <a href="#upcoming" onclick="toggleMenu()" style="display: block; padding: 12px 15px; color: #87CEEB; text-decoration: none; font-weight: bold; font-size: 14px;">🚀 Upcoming Features</a>
-            </div>
-        </div>
     </div>
 </nav>
 
-<!-- JAVASCRIPT FOR THE POPUP TOGGLE -->
-<script>
-function toggleMenu() {
-    var menu = document.getElementById('popupMenu');
-    if (menu.style.display === 'none' || menu.style.display === '') {
-        menu.style.display = 'block';
-    } else {
-        menu.style.display = 'none';
-    }
-}
-
-// Close menu if clicking outside
-window.onclick = function(event) {
-    if (!event.target.closest('.menu-wrap')) {
-        var menu = document.getElementById('popupMenu');
-        if (menu && menu.style.display === 'block') {
-            menu.style.display = 'none';
-        }
-    }
-}
-</script>
-<a href="https://wa.me/2348165836740" class="whatsapp-sticky" target="_blank">
+<!-- WHATSAPP FLOATING BUTTON -->
+<a href="https://wa.me/2348165836740?text=Hello%20BKSON,%20I%20want%20to%20order%20drinks!" class="whatsapp-sticky" target="_blank" title="Chat on WhatsApp">
    <i class="fab fa-whatsapp"></i> 
 </a>
-<div style="text-align: center;">
-    <img src="bksonceo.jpg" alt="CEO" class="ceo-frame" style="margin-bottom: 2;">
 
-    <h2 style="color: var(--mp-blue); margin-top: -20px; font-weight: bold; text-transform: uppercase;">
+<!-- STICKY FLOATING MENU BUTTON -->
+<div class="bkson-float-menu">
+    <div id="bksonMenuPopup" class="bkson-menu-popup">
+        <a href="branches.html"><span>📍</span> Our Branches</a>
+        <a href="checkout.html"><span>🛒</span> Order & Pay</a>
+        <a href="Admin.html"><span>🔐</span> Admin Page</a>
+        <a href="#upcoming"><span>🚀</span> Upcoming Features</a>
+    </div>
+    
+    <button class="bkson-float-btn" onclick="toggleBksonMenu()" title="Open Menu">
+        <span class="emoji-icon">📋</span>
+        <span class="menu-text">Menu</span>
+    </button>
+</div>
+
+<!-- CEO PHOTO & CHANGE CEO PHOTO BUTTON RIGHT UNDERNEATH IT -->
+<div style="text-align: center; margin-top: 25px;">
+    <img src="bksonceo.jpg" alt="CEO" class="ceo-frame">
+
+    <div class="change-photo-container">
+        <button class="change-photo-btn" onclick="promptChangePhoto('bkson_ceo_img', 'ceo-frame')">📷</button>
+        <input type="file" id="file_bkson_ceo_img" style="display: none;" accept="image/*" onchange="uploadNewPhoto(event, 'bkson_ceo_img', 'ceo-frame')">
+    </div>
+
+    <h2 style="color: var(--mp-blue); margin-top: 2px; font-weight: bold; text-transform: uppercase;">
         CEO
     </h2>
 </div>
+
 <div style="text-align: center;">
        <h1>Legacy. Prayer. Growth.</h1>
        <p>From Malam Madori to the World.</p>
 </div>
+
 <div class="section">
     <div class="card" style="border-left: 5px solid #87CEEB; background-color: white; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
         <h2 style="color: #003366; margin-bottom: 15px; letter-spacing: 1px;">THE CEO & VISIONARY</h2>
@@ -235,7 +303,6 @@ window.onclick = function(event) {
 </div>
 
 <div class="gratitude-section" style="background: #ffffff; border-radius: 20px; padding: 30px 20px; box-shadow: 0 10px 35px rgba(0, 51, 102, 0.05); border: 1px solid #eef7fc; max-width: 400px; margin: 30px auto; text-align: center;">
-    
     <h4 style="color: #87CEEB; font-family: sans-serif; font-weight: 800; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 25px 0;">
         Pillars of BKSON
     </h4>
@@ -267,156 +334,158 @@ window.onclick = function(event) {
             To my loyal friends and every supporter who believes in the vision: your energy keeps this enterprise driving forward from <span style="color: #87CEEB; font-weight: bold;">Malam Madori to the World</span>.
         </p>
     </div>
-
 </div>
 
 <div class="section">
     <img src="Bkson-Fura-yogurt.jpg" alt="BKSON Banner" class="fura-banner">
-     Bottle Label
-    <br><br>
+    <!-- Change Banner 1 Photo Button Right Underneath -->
+    <div class="change-photo-container">
+        <button class="change-photo-btn" onclick="promptChangePhoto('bkson_fura_banner', 'fura-banner')">📷</button>
+        <input type="file" id="file_bkson_fura_banner" style="display: none;" accept="image/*" onchange="uploadNewPhoto(event, 'bkson_fura_banner', 'fura-banner')">
+    </div>
+
     <div class="product-card" style="text-align: center; background: white; padding: 25px; border-radius: 15px; border: 1px solid #e0f4ff; box-shadow: 0 5px 15px rgba(135, 206, 235, 0.1);">
-    
-    <h3 style="color: #003366; text-transform: uppercase; margin-bottom: 5px;">BKSON FURA YOGURT</h3>
-    <p style="color: #87CEEB; font-weight: bold; margin-bottom: 15px;">Nature and hygiene in every Sip </p>
+        <h3 style="color: #003366; text-transform: uppercase; margin-bottom: 5px;">BKSON FURA YOGURT</h3>
+        <p style="color: #87CEEB; font-weight: bold; margin-bottom: 15px;">Nature and hygiene in every Sip</p>
 
-    <div style="text-align: left; background: #f9fdff; padding: 15px; border-radius: 10px; border-left: 4px solid #87CEEB;">
-        <h4 style="color: #003366; margin-bottom: 8px; font-size: 0.9rem; text-transform: uppercase;">Our Premium Blend:</h4>
-        <ul style="list-style: none; padding: 0; color: #444; font-size: 0.95rem; line-height: 1.8;">
-            <li>🥥 <strong>Sweet Coconut:</strong> Grated fresh for a rich, creamy texture.</li>
-            <li>🥛 <strong>Fresh Cow Milk (Nono):</strong> Naturally rich and locally sourced.</li>
-            <li>🌾 <strong>Organic Millet (Fura):</strong> Traditionally steamed for the best quality.</li>
-            <li>🌶️ <strong>Natural Spices:</strong> A perfect blend of ginger and <strong>cloves</strong>.</li>
-            <li>💧 <strong>Pure Water:</strong> Filtered and chilled for your health.</li>
-        </ul>
-    </div>
-
-    <p style="margin-top: 15px; font-style: italic; color: #666; font-size: 0.9rem;">
-        Sip the freshness, taste the quality with BKSON.
-    </p>
-</div>
-   
-    <div class="product-card" style="text-align: center; background: white; padding: 20px; border-radius: 15px; border-bottom: 4px solid #87CEEB;">
-    
-    <img src="fura-banner2.jpg" alt="BKSON Premium Fura" style="width: 100%; border-radius: 10px; margin-bottom: 15px;">
-    
-
-    <h3 style="color: #003366; text-transform: uppercase; letter-spacing: 1px;">BKSON FURA YOGURT</h3>
-    
-    <p style="color: #555; line-height: 1.5; font-size: 0.95rem; margin: 10px 0;">
-        Experience the authentic taste of Malam Madori. Our Fura is handcrafted using a <strong>heredity recipe</strong> passed down through generations. We blend the richest traditional yogurt with perfectly spiced millet to give you a creamy, refreshing, and energizing drink.
-    </p>
-
-    <div style="background: #f0faff; padding: 10px; border-radius: 8px; margin: 15px 0;">
-        <span style="color: #003366; font-weight: bold;">✓ 100% Natural</span> | 
-        <span style="color: #003366; font-weight: bold;">✓ Hygienically Packed</span> | 
-        <span style="color: #003366; font-weight: bold;">✓ Chilled for Quality</span>
-    </div>
-
-    <p style="color: #87CEEB; font-weight: bold; font-size: 1.1rem;">
-        Sip the freshness, taste the quality.
-    </p>
-</div>
-
- <div class="product-card" style="text-align: center; background: white; padding: 20px; border-radius: 15px; border-bottom: 4px solid #87CEEB;">
-    
-    <img src="fura-banner3 .jpg" alt="BKSON Premium Fura" style="width: 100%; border-radius: 10px; margin-bottom: 15px;">
-
-    <h3 style="color: #003366; text-transform: uppercase; letter-spacing: 1px;">BKSON FURA YOGURT</h3>
-    
-    <p style="color: #555; line-height: 1.5; font-size: 0.95rem; margin: 10px 0;">
-       Beyond refreshment. An authentic taste so incredibly rich, smooth, and perfect that every sip speaks for itself: Simply elite. Very, very nice.
-    </p>
-
-    <div style="background: #f0faff; padding: 10px; border-radius: 8px; margin: 15px 0;">
-        <span style="color: #003366; font-weight: bold;">✓ 100% Natural</span> | 
-        <span style="color: #003366; font-weight: bold;">✓ Hygienically Packed</span> | 
-        <span style="color: #003366; font-weight: bold;">✓ Chilled for Quality</span>
-    </div>
-
-    <p style="color: #87CEEB; font-weight: bold; font-size: 1.1rem;">
-        Freshness with good quality.
-    </p>
-</div>
-  
-    <div class="premium-praise" style="background: white; border-radius: 16px; padding: 25px; text-align: center; box-shadow: 0 10px 30px rgba(135, 206, 235, 0.15); border: 1px solid #e0f4ff; margin-top: 20px;">
-    
-    <div style="background: #003366; color: white; display: inline-block; padding: 4px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">
-        DRINKS
-    </div>
-
-    <p style="color: #003366; font-size: 1.15rem; line-height: 1.7; font-style: italic; font-weight: 500; margin: 0 auto; max-width: 90%;">
-        At BKSON fura and drinks services, we take your refreshment seriously. We provide a premium selection of your favorite, globally trusted soft drinks—perfectly chilled to sub-zero temperatures. Whether you are pairing them with a meal or cooling down on a hot afternoon, our drinks are stored and served under strict standards to guarantee that every bottle delivers maximum crispness and ultimate satisfaction
-    </p>
-
-    <div style="width: 50px; height: 2px; background: #87CEEB; margin: 15px auto;"></div>
-
-    <p style="color: #87CEEB; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin: 0;">
-        BKSON fura and drinks services
-    </p>
-</div>
-<div class="section">
-    <img src="bkson-drinks.png" alt="BKSON Banner" class="fura-banner">
-    <br><br>
-<div class="product-card" style="background: white; padding: 25px; border-radius: 15px; border: 1px solid #e0f4ff; box-shadow: 0 5px 15px rgba(135, 206, 235, 0.1); margin-top: 20px;">
-    
-    <h3 style="color: #003366; text-transform: uppercase; margin-bottom: 5px; text-align: center;">Ice-Cold Refreshments</h3>
-    <p style="color: #87CEEB; font-weight: bold; margin-bottom: 15px; text-align: center;">BKSON FURA AND DRINKS SERVICES</p>
-
-    <p style="line-height: 1.6; color: #444; font-size: 0.95rem; margin-bottom: 15px;">
-        We complement our signature Fura with a curated selection of world-class soft drinks. Kept at the perfect temperature, our beverages are guaranteed to bring immediate relief and crisp satisfaction to your day.
-      
-    </p>
-
-    <div style="background: #f9fdff; padding: 15px; border-radius: 10px; border-left: 4px solid #87CEEB;">
-        <ul style="list-style: none; padding: 0; color: #333; font-size: 0.95rem; line-height: 1.8; margin: 0;">
-            <li>❄️ <strong>Maximum Chill:</strong> Stored under premium refrigeration for ultimate coldness.</li>
-            <li>🥤 <strong>Trusted Brands:</strong> Only the best, original, and globally loved beverages.</li>
-            <li>⚡ <strong>Instant Refreshment:</strong> The perfect match for any occasion or event.</li>
-        </ul>
-    </div>
-
-    <p style="margin-top: 20px; text-align: center; font-style: italic; color: #003366; font-weight: bold; font-size: 1rem;">
-        Sip the freshness, taste the quality.
-    </p>
-</div>
- 
-    <div class="card">
-        <h3 style="color: var(--mp-blue);">location</h3>
-        <p>Layin Y'an Rake Beside Airtel Service Abuja Quaters Malam Madori Jigawa Nigeria </p>
-    </div>
-<div class="metrics-card" style="background: #ffffff; border-radius: 16px; padding: 15px; text-align: center; box-shadow: 0 10px 35px rgba(0, 51, 102, 0.05); border: 1px solid #eef7fc; max-width: 300px; margin: 25px auto;">
-    <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-        <span style="height: 10px; width: 10px; background-color: #2ecc71; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #2ecc71; animation: pulse 1.5s infinite;"></span>
-        <p style="color: #003366; font-family: sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin: 0;">
-            Total Page Views
+        <div style="text-align: left; background: #f9fdff; padding: 15px; border-radius: 10px; border-left: 4px solid #87CEEB;">
+            <h4 style="color: #003366; margin-bottom: 8px; font-size: 0.9rem; text-transform: uppercase;">Our Premium Blend:</h4>
+            <ul style="list-style: none; padding: 0; color: #444; font-size: 0.95rem; line-height: 1.8;">
+                <li>🥥 <strong>Sweet Coconut:</strong> Grated fresh for a rich, creamy texture.</li>
+                <li>🥛 <strong>Fresh Cow Milk (Nono):</strong> Naturally rich and locally sourced.</li>
+                <li>🌾 <strong>Organic Millet (Fura):</strong> Traditionally steamed for the best quality.</li>
+                <li>🌶️ <strong>Natural Spices:</strong> A perfect blend of ginger and <strong>cloves</strong>.</li>
+                <li>💧 <strong>Pure Water:</strong> Filtered and chilled for your health.</li>
+            </ul>
+        </div>
+        <p style="margin-top: 15px; font-style: italic; color: #666; font-size: 0.9rem;">
+            Sip the freshness, taste the quality with BKSON.
         </p>
     </div>
-    
-</div>
+   
+    <div class="product-card" style="text-align: center; background: white; padding: 20px; border-radius: 15px; border-bottom: 4px solid #87CEEB; margin-top: 20px;">
+        <img src="fura-banner2.jpg" alt="BKSON Premium Fura" id="displayBanner2" style="width: 100%; border-radius: 10px; margin-bottom: 2px;">
+        <!-- Change Banner 2 Button Right Underneath -->
+        <div class="change-photo-container">
+            <button class="change-photo-btn" onclick="promptChangePhoto('bkson_banner_2', 'displayBanner2')">📷</button>
+            <input type="file" id="file_bkson_banner_2" style="display: none;" accept="image/*" onchange="uploadNewPhoto(event, 'bkson_banner_2', 'displayBanner2')">
+        </div>
 
-<div class="newsletter-block" style="background: linear-gradient(135deg, #003366, #001f4d); border-radius: 20px; padding: 35px 20px; box-shadow: 0 15px 35px rgba(0, 51, 102, 0.2); max-width: 400px; margin: 30px auto; text-align: center; border-bottom: 4px solid #87CEEB;">
-    
-    <div style="font-size: 1.8rem; margin-bottom: 10px;">✉️</div>
-    <h3 style="color: #ffffff; font-family: sans-serif; font-size: 1.2rem; font-weight: 700; margin: 0 0 8px 0; letter-spacing: 1px; text-transform: uppercase;">
-        Join the BKSON Circle
-    </h3>
-    <p style="color: #87CEEB; font-family: sans-serif; font-size: 0.85rem; margin: 0 0 25px 0; line-height: 1.4; font-style: italic;">
-        Subscribe to get exclusive updates, fresh menu launches, and community stories.
-    </p>
+        <h3 style="color: #003366; text-transform: uppercase; letter-spacing: 1px;">BKSON FURA YOGURT</h3>
+        <p style="color: #555; line-height: 1.5; font-size: 0.95rem; margin: 10px 0;">
+            Experience the authentic taste of Malam Madori. Our Fura is handcrafted using a <strong>heredity recipe</strong> passed down through generations. We blend the richest traditional yogurt with perfectly spiced millet to give you a creamy, refreshing, and energizing drink.
+        </p>
+        <div style="background: #f0faff; padding: 10px; border-radius: 8px; margin: 15px 0;">
+            <span style="color: #003366; font-weight: bold;">✓ 100% Natural</span> | 
+            <span style="color: #003366; font-weight: bold;">✓ Hygienically Packed</span> | 
+            <span style="color: #003366; font-weight: bold;">✓ Chilled for Quality</span>
+        </div>
+        <p style="color: #87CEEB; font-weight: bold; font-size: 1.1rem;">
+            Sip the freshness, taste the quality.
+        </p>
+    </div>
 
-    <form onsubmit="event.preventDefault(); alert('Thank you for subscribing to BKSON! Feature coming soon.');" style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
-        
-        <input type="email" placeholder="Enter your email address" required style="width: 100%; padding: 14px 15px; border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.1); color: #ffffff; font-family: sans-serif; font-size: 0.9rem; text-align: center; box-sizing: border-box; outline: none; transition: 0.3s;" onfocus="this.style.border='1px solid #87CEEB'; this.style.background='rgba(255, 255, 255, 0.15)';" onblur="this.style.border='1px solid rgba(255, 255, 255, 0.2)'; this.style.background='rgba(255, 255, 255, 0.1)';">
-        
-        <button type="submit" style="width: 100%; padding: 14px 0; border-radius: 25px; border: none; background: #ffffff; color: #003366; font-family: sans-serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.15); transition: 0.2s;" onmouseover="this.style.background='#87CEEB'; this.style.color='#ffffff';" onmouseout="this.style.background='#ffffff'; this.style.color='#003366';">
-            Subscribe Now
-        </button>
+    <div class="product-card" style="text-align: center; background: white; padding: 20px; border-radius: 15px; border-bottom: 4px solid #87CEEB; margin-top: 20px;">
+        <img src="fura-banner3 .jpg" alt="BKSON Premium Fura" id="displayBanner3" style="width: 100%; border-radius: 10px; margin-bottom: 2px;">
+        <!-- Change Banner 3 Button Right Underneath -->
+        <div class="change-photo-container">
+            <button class="change-photo-btn" onclick="promptChangePhoto('bkson_banner_3', 'displayBanner3')">📷</button>
+            <input type="file" id="file_bkson_banner_3" style="display: none;" accept="image/*" onchange="uploadNewPhoto(event, 'bkson_banner_3', 'displayBanner3')">
+        </div>
 
-    </form>
+        <h3 style="color: #003366; text-transform: uppercase; letter-spacing: 1px;">BKSON FURA YOGURT</h3>
+        <p style="color: #555; line-height: 1.5; font-size: 0.95rem; margin: 10px 0;">
+           Beyond refreshment. An authentic taste so incredibly rich, smooth, and perfect that every sip speaks for itself: Simply elite. Very, very nice.
+        </p>
+        <div style="background: #f0faff; padding: 10px; border-radius: 8px; margin: 15px 0;">
+            <span style="color: #003366; font-weight: bold;">✓ 100% Natural</span> | 
+            <span style="color: #003366; font-weight: bold;">✓ Hygienically Packed</span> | 
+            <span style="color: #003366; font-weight: bold;">✓ Chilled for Quality</span>
+        </div>
+        <p style="color: #87CEEB; font-weight: bold; font-size: 1.1rem;">
+            Freshness with good quality.
+        </p>
+    </div>
+  
+    <div class="premium-praise" style="background: white; border-radius: 16px; padding: 25px; text-align: center; box-shadow: 0 10px 30px rgba(135, 206, 235, 0.15); border: 1px solid #e0f4ff; margin-top: 20px;">
+        <div style="background: #003366; color: white; display: inline-block; padding: 4px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">
+            DRINKS
+        </div>
+        <p style="color: #003366; font-size: 1.15rem; line-height: 1.7; font-style: italic; font-weight: 500; margin: 0 auto; max-width: 90%;">
+            At BKSON fura and drinks services, we take your refreshment seriously. We provide a premium selection of your favorite, globally trusted soft drinks—perfectly chilled to sub-zero temperatures. Whether you are pairing them with a meal or cooling down on a hot afternoon, our drinks are stored and served under strict standards to guarantee that every bottle delivers maximum crispness and ultimate satisfaction
+        </p>
+        <div style="width: 50px; height: 2px; background: #87CEEB; margin: 15px auto;"></div>
+        <p style="color: #87CEEB; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin: 0;">
+            BKSON fura and drinks services
+        </p>
+    </div>
 
-    <p style="color: rgba(255, 255, 255, 0.5); font-family: sans-serif; font-size: 0.7rem; margin: 15px 0 0 0; letter-spacing: 0.5px;">
-        Zero spam. Unsubscribe anytime.
-    </p>
+<div class="section">
+    <img src="bkson-drinks.png" alt="BKSON Banner" id="displayDrinksBanner" class="fura-banner">
+    <!-- Change Drinks Banner Button Right Underneath -->
+    <div class="change-photo-container">
+        <button class="change-photo-btn" onclick="promptChangePhoto('bkson_drinks_banner', 'displayDrinksBanner')">📷</button>
+        <input type="file" id="file_bkson_drinks_banner" style="display: none;" accept="image/*" onchange="uploadNewPhoto(event, 'bkson_drinks_banner', 'displayDrinksBanner')">
+    </div>
+
+    <div class="product-card" style="background: white; padding: 25px; border-radius: 15px; border: 1px solid #e0f4ff; box-shadow: 0 5px 15px rgba(135, 206, 235, 0.1); margin-top: 20px;">
+        <h3 style="color: #003366; text-transform: uppercase; margin-bottom: 5px; text-align: center;">Ice-Cold Refreshments</h3>
+        <p style="color: #87CEEB; font-weight: bold; margin-bottom: 15px; text-align: center;">BKSON FURA AND DRINKS SERVICES</p>
+
+        <p style="line-height: 1.6; color: #444; font-size: 0.95rem; margin-bottom: 15px;">
+            We complement our signature Fura with a curated selection of world-class soft drinks. Kept at the perfect temperature, our beverages are guaranteed to bring immediate relief and crisp satisfaction to your day.
+        </p>
+
+        <div style="background: #f9fdff; padding: 15px; border-radius: 10px; border-left: 4px solid #87CEEB;">
+            <ul style="list-style: none; padding: 0; color: #333; font-size: 0.95rem; line-height: 1.8; margin: 0;">
+                <li>❄️ <strong>Maximum Chill:</strong> Stored under premium refrigeration for ultimate coldness.</li>
+                <li>🥤 <strong>Trusted Brands:</strong> Only the best, original, and globally loved beverages.</li>
+                <li>⚡ <strong>Instant Refreshment:</strong> The perfect match for any occasion or event.</li>
+            </ul>
+        </div>
+        <p style="margin-top: 20px; text-align: center; font-style: italic; color: #003366; font-weight: bold; font-size: 1rem;">
+            Sip the freshness, taste the quality.
+        </p>
+    </div>
+ 
+    <div class="card" style="margin-top: 20px;">
+        <h3 style="color: var(--mp-blue);">location</h3>
+        <p>Layin Y'an Rake Beside Airtel Service Abuja Quaters Malam Madori Jigawa Nigeria</p>
+    </div>
+
+    <div class="metrics-card" style="background: #ffffff; border-radius: 16px; padding: 15px; text-align: center; box-shadow: 0 10px 35px rgba(0, 51, 102, 0.05); border: 1px solid #eef7fc; max-width: 300px; margin: 25px auto;">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <span style="height: 10px; width: 10px; background-color: #2ecc71; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #2ecc71; animation: pulse 1.5s infinite;"></span>
+            <p style="color: #003366; font-family: sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin: 0;">
+                Total Page Views
+            </p>
+        </div>
+    </div>
+
+    <div class="newsletter-block" style="background: linear-gradient(135deg, #003366, #001f4d); border-radius: 20px; padding: 35px 20px; box-shadow: 0 15px 35px rgba(0, 51, 102, 0.2); max-width: 400px; margin: 30px auto; text-align: center; border-bottom: 4px solid #87CEEB;">
+        <div style="font-size: 1.8rem; margin-bottom: 10px;">✉️</div>
+        <h3 style="color: #ffffff; font-family: sans-serif; font-size: 1.2rem; font-weight: 700; margin: 0 0 8px 0; letter-spacing: 1px; text-transform: uppercase;">
+            Join the BKSON Circle
+        </h3>
+        <p style="color: #87CEEB; font-family: sans-serif; font-size: 0.85rem; margin: 0 0 25px 0; line-height: 1.4; font-style: italic;">
+            Subscribe to get exclusive updates, fresh menu launches, and community stories.
+        </p>
+        <form onsubmit="event.preventDefault(); alert('Thank you for subscribing to BKSON! Feature coming soon.');" style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
+            <input type="email" placeholder="Enter your email address" required style="width: 100%; padding: 14px 15px; border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.1); color: #ffffff; font-family: sans-serif; font-size: 0.9rem; text-align: center; box-sizing: border-box; outline: none; transition: 0.3s;" onfocus="this.style.border='1px solid #87CEEB'; this.style.background='rgba(255, 255, 255, 0.15)';" onblur="this.style.border='1px solid rgba(255, 255, 255, 0.2)'; this.style.background='rgba(255, 255, 255, 0.1)';">
+            <button type="submit" style="width: 100%; padding: 14px 0; border-radius: 25px; border: none; background: #ffffff; color: #003366; font-family: sans-serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.15); transition: 0.2s;" onmouseover="this.style.background='#87CEEB'; this.style.color='#ffffff';" onmouseout="this.style.background='#ffffff'; this.style.color='#003366';">
+                Subscribe Now
+            </button>
+        </form>
+        <p style="color: rgba(255, 255, 255, 0.5); font-family: sans-serif; font-size: 0.7rem; margin: 15px 0 0 0; letter-spacing: 0.5px;">
+            Zero spam. Unsubscribe anytime.
+        </p>
+    </div>
+
+    <p style="text-align: center;">Web Designed By: Bkson Graphics & Designed</p>
+
+    <footer>
+        <p>&copy; 2026 BKSON FURA & DRINKS SERVICES | All Rights Reserved.</p>
+    </footer>
 </div>
 
 <style>
@@ -426,11 +495,7 @@ window.onclick = function(event) {
     100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
 }
 </style>
-<p>Web Designed By: Bkson Graphics & Designed</p>
 
-<footer>
-    <p>&copy; 2026 BKSON FURA & DRINKS SERVICES | All Rights Reserved.</p>
-</footer>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     // 1. Move Language Dropdown to the top header
@@ -440,17 +505,14 @@ document.addEventListener("DOMContentLoaded", function() {
     header.insertBefore(langDiv, header.firstChild);
 
     // 2. Locate and Upgrade your View Counter Container
-    // This finds your total page views section and injects a clean text counter
     const counterHeading = Array.from(document.querySelectorAll('h1, h2, h3, p, span'))
         .find(el => el.textContent.includes('TOTAL PAGE VIEWS') || el.textContent.includes('Total Page Views'));
     
     if (counterHeading) {
         const counterContainer = counterHeading.parentElement;
-        // Remove old broken hitwebcounter images if they exist
         const oldImg = counterContainer.querySelector('img');
         if (oldImg) oldImg.remove();
         
-        // Inject modern live counter box
         const newCounter = document.createElement('div');
         newCounter.className = 'bkson-counter-box';
         newCounter.innerHTML = '<span id="bkson-counter">201</span> <span class="views-text">Views</span>';
@@ -460,18 +522,15 @@ document.addEventListener("DOMContentLoaded", function() {
     // 3. Upgrade your Subscription Form Area to FormSubmit Backend
     const subForm = document.querySelector('form');
     if (subForm) {
-        // Connects to a secure, cloud-based dashboard with auto-welcome response features
         subForm.setAttribute('action', 'https://formsubmit.co/bksonfurayogurt@gmail.com');
         subForm.setAttribute('method', 'POST');
         
-        // FormSubmit Configuration inputs
         subForm.insertAdjacentHTML('beforeend', `
             <input type="hidden" name="_next" value="https://bkson001.github.io/">
             <input type="hidden" name="_subject" value="New BKSON Circle Subscriber! 🎉">
             <input type="hidden" name="_autoresponse" value="Thank you for joining the BKSON Circle! As the CEO, I deeply respect and appreciate your support. Stay tuned for fresh menu launches and exclusive updates straight from Malam Madori!">
         `);
         
-        // Make sure email input field has the correct name tag
         const emailInput = subForm.querySelector('input[type="email"]');
         if (emailInput) {
             emailInput.setAttribute('name', 'email');
@@ -479,9 +538,55 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     
-    // Launch the Live Local Counter calculations
     initBksonCounter();
 });
+
+// STICKY MENU TOGGLE FUNCTION
+function toggleBksonMenu() {
+    const popup = document.getElementById('bksonMenuPopup');
+    popup.style.display = (popup.style.display === 'block') ? 'none' : 'block';
+}
+
+window.addEventListener('click', function(e) {
+    const floatMenu = document.querySelector('.bkson-float-menu');
+    const popup = document.getElementById('bksonMenuPopup');
+    if (floatMenu && popup && !floatMenu.contains(e.target)) {
+        popup.style.display = 'none';
+    }
+});
+
+// ADMIN PASSWORD PROTECTION & PHOTO UPLOAD LOGIC
+const ADMIN_PASSWORD_KEY = "1234"; // Admin password verification
+
+function promptChangePhoto(storageKey, elementClassOrId) {
+    let password = prompt("Enter Admin Password to change photo:");
+    if (password === null) return; // User cancelled
+    
+    if (password === ADMIN_PASSWORD_KEY) {
+        document.getElementById('file_' + storageKey).click();
+    } else {
+        alert("Incorrect password! Access denied.");
+    }
+}
+
+function uploadNewPhoto(event, storageKey, elementClassOrId) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const base64Image = e.target.result;
+            localStorage.setItem(storageKey, base64Image);
+            
+            const elements = document.querySelectorAll('.' + elementClassOrId + ', #' + elementClassOrId);
+            elements.forEach(el => {
+                el.src = base64Image;
+            });
+            
+            alert("Photo updated successfully!");
+        };
+        reader.readAsDataURL(file);
+    }
+}
 </script>
 
 <style>
@@ -525,24 +630,19 @@ document.addEventListener("DOMContentLoaded", function() {
 </style>
 
 <script type="text/javascript">
-// Google Translation Engine Init
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({
         pageLanguage: 'en',
-        includedLanguages: 'ha,ar,fr,en', // Hausa, Arabic, French, English layout optimization
+        includedLanguages: 'ha,ar,fr,en',
         layout: google.translate.TranslateElement.InlineLayout.SIMPLE
     }, 'google_translate_element');
 }
 
-// REAL CLOUD VISITOR TRACKER ENGINE
 function initBksonCounter() {
-    // This fetches a real live number from a global web server room assigned to your username
     fetch('https://count.getloli.com/get/@bkson001_official_count')
     .then(res => res.json())
     .then(data => {
-        // This takes the real world count and adds your baseline 201 start point smoothly!
         const globalViews = data.value + 201;
-        
         const counterDisplay = document.getElementById('bkson-counter');
         if (counterDisplay) {
             counterDisplay.innerText = globalViews;
@@ -550,11 +650,10 @@ function initBksonCounter() {
     })
     .catch(err => {
         console.log("Server lag, using local fallback");
-        // Fallback display if network lags slightly
         document.getElementById('bkson-counter').innerText = "999+";
     });
 }
 </script>
 <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
-      </html>
+                                                                                                                                                               </html>
