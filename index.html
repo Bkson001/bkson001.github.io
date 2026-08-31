@@ -26,6 +26,7 @@
     --whatsapp-green: #25D366;
 }
         body {
+          
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding-top: 80px; 
@@ -92,45 +93,40 @@
     </style>
 </head>
 <body>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Update CEO Photo if changed in admin
+    const savedCeoImg = localStorage.getItem('bkson_ceo_img');
+    if (savedCeoImg) {
+        const ceoImgElement = document.querySelector('.ceo-frame');
+        if (ceoImgElement) ceoImgElement.src = savedCeoImg;
+    }
 
-<a href="https://www.google.com/maps/search/?api=1&query="BKSON+FURA+AND+DRINKS+SERVICES" 
-   target="_blank" 
-   class="bkson-location-float" 
-   title="Find BKSON Store on Google Maps">
-   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
-      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-   </svg>
-</a>
+    // 2. Update Brand Title if changed in admin
+    const savedBrandTitle = localStorage.getItem('bkson_brand_title');
+    if (savedBrandTitle) {
+        const titleElement = document.querySelector('.brand-text h1');
+        if (titleElement) titleElement.textContent = savedBrandTitle;
+    }
 
-<style>
-.bkson-location-float {
-    position: fixed;
-    bottom: 55px; /* Sits perfectly above your floating WhatsApp button layout */
-    right: 20px;
-    background-color: #ea4335; /* Professional Google Maps Crimson Red */
-    color: #ffffff;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.35);
-    z-index: 9999; /* Forces the button to stay on top of all banners and text */
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    -webkit-tap-highlight-color: transparent;
-}
+    // 3. Update CEO Bio text if changed in admin
+    const savedCeoBio = localStorage.getItem('bkson_ceo_bio');
+    if (savedCeoBio) {
+        // Targets the first paragraph inside the CEO section card
+        const bioParagraph = document.querySelector('.section .card p');
+        if (bioParagraph) {
+            bioParagraph.innerHTML = savedCeoBio;
+        }
+    }
 
-/* Fluid Hover Animation for Premium Mobile Feel */
-.bkson-location-float:hover {
-    transform: scale(1.1);
-    background-color: #d23225; /* Slightly deeper red when tapped */
-}
-
-/* Ensures the inner map icon aligns perfectly inside the red circle */
-.bkson-location-float svg {
-    display: block;
-}
+    // 4. Update Fura Banner image if changed in admin
+    const savedFuraBanner = localStorage.getItem('bkson_fura_banner');
+    if (savedFuraBanner) {
+        const bannerElement = document.querySelector('.fura-banner');
+        if (bannerElement) bannerElement.src = savedFuraBanner;
+    }
+});
+</script>
 </style>
 <nav>
     <div class="logo-container">
@@ -144,7 +140,62 @@
     <br>Cooling 24/7
     </div>
 </nav>
+<nav style="position: fixed; top: 0; width: 100%; height: 80px; background: white; display: flex; justify-content: space-between; align-items: center; padding: 0 15px; box-sizing: border-box; border-bottom: 3px solid var(--mp-blue); z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+    
+    <!-- LEFT: Logo & Brand Text -->
+    <div class="logo-container" style="display: flex; align-items: center;">
+        <img src="Company-logo.png" alt="Logo" class="business-logo" style="width: 40px; height: 40px; border-radius: 8px; margin-right: 8px; object-fit: cover;">
+        <div class="brand-text">
+            <h1 style="font-size: 16px; margin: 0; letter-spacing: 1px;">BKSON</h1>
+            <p style="font-size: 10px; margin: 0; font-weight: bold; color: #777;">FURA AND DRINKS</p>
+        </div>
+    </div>
+    
+    <!-- RIGHT: Est. 2011 text + Three Dots Popup Menu right where you marked -->
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <div style="font-size: 11px; font-weight: bold; text-align: right; line-height: 1.2; color: #003366;">
+            Est. 2011
+            <br><span style="color: #555;">Cooling 24/7</span>
+        </div>
 
+        <!-- THREE DOTS POPUP MENU (Placed right next to Est. 2011) -->
+        <div class="menu-wrap" style="position: relative;">
+            <button onclick="toggleMenu()" style="background: transparent; border: none; color: #003366; font-size: 30px; font-weight: bold; cursor: pointer; padding: 0 5px; letter-spacing: 0px;" title="Menu">
+                &#8942;
+            </button>
+
+            <!-- THE POPUP DROPDOWN BOX -->
+            <div id="popupMenu" style="display: none; position: absolute; right: 0; top: 35px; background: white; width: 200px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,51,102,0.2); border: 1px solid #e0f4ff; overflow: hidden; z-index: 2000;">
+                <a href="branches.html" style="display: block; padding: 12px 15px; color: #003366; text-decoration: none; font-weight: bold; font-size: 14px; border-bottom: 1px solid #f0faff;">📍 Our Branches</a>
+                <a href="checkout.html" style="display: block; padding: 12px 15px; color: #003366; text-decoration: none; font-weight: bold; font-size: 14px; border-bottom: 1px solid #f0faff;">🛒 Order & Pay</a>
+                <a href="Admin.html" style="display: block; padding: 12px 15px; color: #003366; text-decoration: none; font-weight: bold; font-size: 14px; border-bottom: 1px solid #f0faff;">🔐 Admin Page</a>
+                <a href="#upcoming" onclick="toggleMenu()" style="display: block; padding: 12px 15px; color: #87CEEB; text-decoration: none; font-weight: bold; font-size: 14px;">🚀 Upcoming Features</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- JAVASCRIPT FOR THE POPUP TOGGLE -->
+<script>
+function toggleMenu() {
+    var menu = document.getElementById('popupMenu');
+    if (menu.style.display === 'none' || menu.style.display === '') {
+        menu.style.display = 'block';
+    } else {
+        menu.style.display = 'none';
+    }
+}
+
+// Close menu if clicking outside
+window.onclick = function(event) {
+    if (!event.target.closest('.menu-wrap')) {
+        var menu = document.getElementById('popupMenu');
+        if (menu && menu.style.display === 'block') {
+            menu.style.display = 'none';
+        }
+    }
+}
+</script>
 <a href="https://wa.me/2348165836740" class="whatsapp-sticky" target="_blank">
    <i class="fab fa-whatsapp"></i> 
 </a>
@@ -506,4 +557,4 @@ function initBksonCounter() {
 </script>
 <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
-</html>
+      </html>
