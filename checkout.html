@@ -55,23 +55,41 @@
         }
         .modal-content {
             background-color: white;
-            margin: 15% auto;
+            margin: 10% auto;
             padding: 20px;
             border-radius: 10px;
-            width: 85%;
-            max-width: 400px;
+            width: 90%;
+            max-width: 550px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-        .modal-item {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.95rem;
+        .close-modal { float: right; cursor: pointer; font-size: 1.4rem; color: red; font-weight: bold; }
+
+        /* Notebook Scrollable Table Styling */
+        .table-scroll-container {
+            max-height: 280px;
+            overflow-y: auto;
+            border: 1px solid #bce3f7;
+            border-radius: 6px;
+            margin-top: 10px;
         }
-        .modal-item:hover { background: #f0faff; color: #27ae60; font-weight: bold; }
-        .close-modal { float: right; cursor: pointer; font-size: 1.2rem; color: red; }
+        .menu-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        .menu-table th {
+            background: var(--mp-dark);
+            color: white;
+            padding: 10px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .menu-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #eee;
+        }
 
         .btn {
             background: #27ae60; color: white; border: none; padding: 14px;
@@ -117,7 +135,7 @@
 
     <div class="container">
         <h2>🛒 BKSON Order & Secure Pay</h2>
-        <p style="text-align: center; color: #666; font-size: 0.85rem; margin-bottom: 15px;">Select your branch, pick from our available list or type your order, and pay securely.</p>
+        <p style="text-align: center; color: #666; font-size: 0.85rem; margin-bottom: 15px;">Select your branch, pick from our available list, and pay securely.</p>
 
         <div class="paystack-box">
             <i class="fas fa-shield-alt"></i> <strong>Paystack Secure Checkout Active:</strong> Direct merchant payment integration.
@@ -140,18 +158,10 @@
             </div>
 
             <div class="form-group">
-                <label>Drink / Product Name</label>
-                <input type="text" id="customDrinkInput" placeholder="Click guide above or type item name..." required>
-            </div>
-
-            <div class="form-group">
-                <label>Unit Price (₦)</label>
-                <input type="number" id="unitPriceInput" placeholder="Auto-fills from guide or type price..." min="50" required oninput="updateTotal()">
-            </div>
-
-            <div class="form-group">
-                <label>Quantity</label>
-                <input type="number" id="qtyInput" value="1" min="1" max="100" required oninput="updateTotal()">
+                <label>Selected Product-List Summary</label>
+                <div id="selectedSummaryDisplay" style="padding: 12px; background: #eaf6fc; border: 1px solid #bce3f7; border-radius: 8px; font-size: 0.9rem; min-height: 45px; color: #003366;">
+                    <em>No items selected yet. Click guide above.</em>
+                </div>
             </div>
 
             <div class="form-group">
@@ -177,16 +187,34 @@
             <button type="submit" class="btn"><i class="fas fa-credit-card"></i> Pay Securely via Paystack & Get Receipt</button>
         </form>
 
+        <!-- POPUP MENU MODAL WITH SCROLLABLE TABLE -->
         <div id="menuModal" class="modal">
             <div class="modal-content">
                 <span class="close-modal" onclick="closeMenuModal()">&times;</span>
-                <h3 style="color: #003366; margin-top: 0; font-size: 1.1rem;">Available Drinks Menu</h3>
-                <p style="font-size: 0.8rem; color: #666;">Tap any item to auto-fill it:</p>
-                <div id="modalProductList">
-                    </div>
+                <h3 style="color: #003366; margin-top: 0; font-size: 1.1rem; text-align: center;">Available Drinks & Price Guide</h3>
+                <p style="font-size: 0.8rem; color: #666; text-align: center;">Select items and set quantities from your choices:</p>
+                
+                <div class="table-scroll-container">
+                    <table class="menu-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center; width: 40px;">Select</th>
+                                <th>Product Name</th>
+                                <th>Price (₦)</th>
+                                <th style="text-align: center; width: 60px;">Qty</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modalProductTableBody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <button type="button" class="btn" onclick="applySelection()" style="margin-top: 15px; padding: 10px;">Done & Save Selection</button>
             </div>
         </div>
 
+        <!-- RECEIPT SECTION -->
         <div id="receiptSection">
             <div class="receipt-top-banner">
                 <div>
@@ -220,13 +248,8 @@
                         <th>Amount</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td id="recProduct">-</td>
-                        <td id="recQty">-</td>
-                        <td id="recUnitPrice">-</td>
-                        <td id="recItemTotal">-</td>
-                    </tr>
+                <tbody id="recTableBody">
+                    <!-- Dynamic Items -->
                 </tbody>
             </table>
 
@@ -251,40 +274,40 @@
     </div>
 
     <script>
-        // Load default products if none exist in browser storage yet
         function getProducts() {
             let saved = localStorage.getItem('bkson_admin_products');
             if (saved) {
                 return JSON.parse(saved);
             }
             return [
-                { name: "Pop Cola Drink", price: 250 },
-                { name: "Coca Cola / Chilled Soft Drink", price: 500 },
                 { name: "BKSON Standard Fura Yogurt", price: 1000 },
+                { name: "Coca Cola / Chilled Soft Drink", price: 500 },
+                { name: "Pop Cola Drink", price: 250 },
+                { name: "Fanta", price: 500 },
+                { name: "Zobo", price: 1500 },
                 { name: "Exotic / Premium Large Pack", price: 1500 }
             ];
         }
 
+        let selectedItemsCache = [];
+
         function openMenuModal() {
-            const listContainer = document.getElementById('modalProductList');
-            listContainer.innerHTML = "";
+            const tableBody = document.getElementById('modalProductTableBody');
+            tableBody.innerHTML = "";
             const products = getProducts();
 
-            if(products.length === 0) {
-                listContainer.innerHTML = "<p style='color:red; text-align:center;'>No drinks currently active.</p>";
-            }
+            products.forEach((item, index) => {
+                let isChecked = selectedItemsCache.some(i => i.name === item.name);
+                let currentQty = isChecked ? selectedItemsCache.find(i => i.name === item.name).qty : 1;
 
-            products.forEach(item => {
-                let div = document.createElement('div');
-                div.className = 'modal-item';
-                div.innerHTML = `<span>${item.name}</span> <strong style="color: #003366;">₦${item.price.toLocaleString()}</strong>`;
-                div.onclick = function() {
-                    document.getElementById('customDrinkInput').value = item.name;
-                    document.getElementById('unitPriceInput').value = item.price;
-                    updateTotal();
-                    closeMenuModal();
-                };
-                listContainer.appendChild(div);
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="text-align: center;"><input type="checkbox" class="modal-check" data-name="${item.name}" data-price="${item.price}" ${isChecked ? 'checked' : ''}></td>
+                    <td>${item.name}</td>
+                    <td>₦${item.price.toLocaleString()}</td>
+                    <td style="text-align: center;"><input type="number" class="modal-qty" value="${currentQty}" min="1" max="100" style="width: 45px; text-align: center; padding: 4px; border: 1px solid #ccc; border-radius: 4px;"></td>
+                `;
+                tableBody.appendChild(tr);
             });
 
             document.getElementById('menuModal').style.display = 'block';
@@ -294,24 +317,74 @@
             document.getElementById('menuModal').style.display = 'none';
         }
 
-        function updateTotal() {
-            const price = parseFloat(document.getElementById('unitPriceInput').value) || 0;
-            const qty = parseInt(document.getElementById('qtyInput').value) || 1;
-            const total = price * qty;
-            document.getElementById('totalDisplay').innerText = '₦' + total.toLocaleString();
+        function applySelection() {
+            const checks = document.querySelectorAll('.modal-check');
+            const qtys = document.querySelectorAll('.modal-qty');
+            selectedItemsCache = [];
+
+            checks.forEach((chk, index) => {
+                if (chk.checked) {
+                    selectedItemsCache.push({
+                        name: chk.getAttribute('data-name'),
+                        price: parseFloat(chk.getAttribute('data-price')),
+                        qty: parseInt(qtys[index].value) || 1
+                    });
+                }
+            });
+
+            updateMainView();
+            closeMenuModal();
+        }
+
+        function updateMainView() {
+            const summaryDiv = document.getElementById('selectedSummaryDisplay');
+            let grandTotal = 0;
+
+            if (selectedItemsCache.length === 0) {
+                summaryDiv.innerHTML = "<em>No items selected yet. Click guide above.</em>";
+                document.getElementById('totalDisplay').innerText = "₦0";
+                return;
+            }
+
+            let summaryHtml = "";
+            selectedItemsCache.forEach(item => {
+                let sub = item.price * item.qty;
+                grandTotal += sub;
+                summaryHtml += `<div>• ${item.name} (${item.qty}x) - ₦${sub.toLocaleString()}</div>`;
+            });
+
+            summaryDiv.innerHTML = summaryHtml;
+            document.getElementById('totalDisplay').innerText = "₦" + grandTotal.toLocaleString();
         }
 
         function processOrder(e) {
             e.preventDefault();
 
+            if (selectedItemsCache.length === 0) {
+                alert("Please click the guide and select at least one drink before proceeding.");
+                return;
+            }
+
             const branch = document.getElementById('branchSelect').value;
-            const productName = document.getElementById('customDrinkInput').value;
-            const price = parseFloat(document.getElementById('unitPriceInput').value);
-            const qty = document.getElementById('qtyInput').value;
             const name = document.getElementById('custName').value;
             const phone = document.getElementById('custPhone').value;
             const address = document.getElementById('custAddress').value;
-            const total = price * qty;
+
+            let grandTotal = 0;
+            let recTableHtml = "";
+
+            selectedItemsCache.forEach(item => {
+                let sub = item.price * item.qty;
+                grandTotal += sub;
+                recTableHtml += `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.qty}</td>
+                        <td>₦${item.price.toLocaleString()}</td>
+                        <td>₦${sub.toLocaleString()}</td>
+                    </tr>
+                `;
+            });
 
             const randomId = 'BK-' + Math.floor(1000 + Math.random() * 9000);
             const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -344,12 +417,9 @@
             document.getElementById('recPhone').innerText = phone;
             document.getElementById('recAddress').innerText = address;
             document.getElementById('recDate').innerText = today;
-            document.getElementById('recProduct').innerText = productName;
-            document.getElementById('recQty').innerText = qty;
-            document.getElementById('recUnitPrice').innerText = '₦' + price.toLocaleString();
-            document.getElementById('recItemTotal').innerText = '₦' + total.toLocaleString();
-            document.getElementById('recSubtotal').innerText = '₦' + total.toLocaleString();
-            document.getElementById('recTotal').innerText = '₦' + total.toLocaleString();
+            document.getElementById('recTableBody').innerHTML = recTableHtml;
+            document.getElementById('recSubtotal').innerText = '₦' + grandTotal.toLocaleString();
+            document.getElementById('recTotal').innerText = '₦' + grandTotal.toLocaleString();
             document.getElementById('recTime').innerText = deliveryTimeText;
             document.getElementById('recFooterAddress').innerHTML = footerAddressText;
 
@@ -358,4 +428,4 @@
         }
     </script>
 </body>
-</html>
+    </html>
