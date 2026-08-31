@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 BKSON Admin Control Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --mp-blue: #87CEEB;
+            --mp-dark: #003366;
+            --mp-gray: #f0faff;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--mp-gray);
+            margin: 0;
+            padding: 20px;
+            color: var(--mp-dark);
+        }
+        .admin-container {
+            max-width: 700px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 51, 102, 0.1);
+            border-top: 5px solid var(--mp-dark);
+        }
+        h2 {
+            color: var(--mp-dark);
+            text-align: center;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            background: #f9fdff;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e0f4ff;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--mp-dark);
+            font-size: 0.95rem;
+        }
+        input[type="text"], input[type="password"], input[type="number"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #bce3f7;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.2s;
+        }
+        input:focus, textarea:focus {
+            border-color: var(--mp-dark);
+            box-shadow: 0 0 5px rgba(0,51,102,0.1);
+        }
+        textarea {
+            resize: vertical;
+            height: 90px;
+        }
+        .btn {
+            background: var(--mp-dark);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0,51,102,0.2);
+            transition: 0.2s;
+        }
+        .btn:hover {
+            background: #001f4d;
+            transform: translateY(-1px);
+        }
+        .btn-green {
+            background: #27ae60;
+            border-radius: 8px;
+            margin-top: 5px;
+        }
+        .btn-green:hover {
+            background: #219653;
+        }
+
+        /* Product Management List Styles */
+        .product-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #d0e8f5;
+        }
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        .delete-btn:hover { background: #c0392b; }
+
+        /* Secure Login Gate Overlay */
+        #loginGate {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 51, 102, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+        }
+        .login-box {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 350px;
+            width: 90%;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        .login-box h3 {
+            color: var(--mp-dark);
+            margin-top: 0;
+            text-transform: uppercase;
+        }
+        .error-msg {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            display: none;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: var(--mp-dark);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SECURE PASSCODE GATE -->
+    <div id="loginGate">
+        <div class="login-box">
+            <h3>🔐 Admin Portal</h3>
+            <p style="font-size: 0.85rem; color: #666; margin-bottom: 20px;">Enter your master passcode to access the management panel.</p>
+            <form onsubmit="verifyAdmin(event)">
+                <input type="password" id="adminPass" placeholder="Enter Secret Passcode" required style="text-align: center; margin-bottom: 15px;">
+                <button type="submit" class="btn">Unlock Portal</button>
+                <div id="errorText" class="error-msg">Incorrect passcode! Access denied.</div>
+            </form>
+            <a href="index.html" style="display: block; margin-top: 15px; color: #888; font-size: 0.8rem; text-decoration: none;">← Return to Main Website</a>
+        </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD PANEL -->
+    <div class="admin-container" id="adminPanel" style="display: none;">
+        <h2>🛠️ BKSON Management Hub</h2>
+        <p class="subtitle">Update your executive profile, media banners, and manage your live drinks schedule.</p>
+
+        <!-- SITE PROFILE & CONTENT SETTINGS -->
+        <form onsubmit="saveSiteContent(event)">
+            <div class="form-group">
+                <label>👤 CEO Photo Filename / URL</label>
+                <input type="text" id="inputCeoImg" placeholder="e.g. bksonceo.jpg">
+            </div>
+
+            <div class="form-group">
+                <label>🏷️ Main Brand Title text</label>
+                <input type="text" id="inputBrandTitle" placeholder="BKSON">
+            </div>
+
+            <div class="form-group">
+                <label>📝 CEO Statement & Vision Description</label>
+                <textarea id="inputCeoBio" placeholder="Update the executive description text here..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>🥤 Fura Yogurt Banner Image Filename</label>
+                <input type="text" id="inputFuraBanner" placeholder="e.g. Bkson-Fura-yogurt.jpg">
+            </div>
+
+            <button type="submit" class="btn">Save General Profile Settings</button>
+        </form>
+
+        <hr style="border: 0; border-top: 1px solid #d0e8f5; margin: 30px 0;">
+
+        <!-- DRINKS & PRICE GUIDE MANAGEMENT -->
+        <h3 style="color: var(--mp-dark); text-transform: uppercase; font-size: 1.1rem; margin-bottom: 15px;">
+            📋 Available Drinks & Price Guide Control
+        </h3>
+        <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">Add new product drinks coming into the market or remove items out of stock instantly.</p>
+
+        <!-- ADD NEW DRINK SUB-FORM -->
+        <div class="form-group" style="background: #eaf6fc;">
+            <label><i class="fas fa-plus-circle"></i> Add New Drink to Price Guide</label>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-bottom: 10px;">
+                <input type="text" id="newDrinkName" placeholder="Drink Name (e.g. Maltina, Pepsi)">
+                <input type="number" id="newDrinkPrice" placeholder="Price (₦)" min="50">
+            </div>
+            <button type="button" class="btn btn-green" onclick="addNewProduct()"><i class="fas fa-plus"></i> Add Drink to Schedule</button>
+        </div>
+
+        <!-- ACTIVE DRINKS SCHEDULE LIST -->
+        <div class="form-group">
+            <label>📦 Currently Active Drinks List</label>
+            <div id="adminProductList" style="margin-top: 10px;">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+
+        <a href="index.html" class="back-link">← Go Back to Homepage</a>
+    </div>
+
+    <script>
+        // Set your secret admin passcode here
+        const MASTER_PASSCODE = "bkson2011";
+
+        function verifyAdmin(e) {
+            e.preventDefault();
+            const enteredPass = document.getElementById('adminPass').value;
+            
+            if (enteredPass === MASTER_PASSCODE) {
+                document.getElementById('loginGate').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                loadCurrentValues();
+                loadAdminProducts();
+            } else {
+                document.getElementById('errorText').style.display = 'block';
+            }
+        }
+
+        // Load existing content into admin inputs from localStorage or defaults
+        function loadCurrentValues() {
+            document.getElementById('inputCeoImg').value = localStorage.getItem('bkson_ceo_img') || 'bksonceo.jpg';
+            document.getElementById('inputBrandTitle').value = localStorage.getItem('bkson_brand_title') || 'BKSON';
+            document.getElementById('inputCeoBio').value = localStorage.getItem('bkson_ceo_bio') || 'I am the driving force behind BKSON FURA AND DRINKS SERVICES...';
+            document.getElementById('inputFuraBanner').value = localStorage.getItem('bkson_fura_banner') || 'Bkson-Fura-yogurt.jpg';
+        }
+
+        // Save site profile modifications locally
+        function saveSiteContent(e) {
+            e.preventDefault();
+            
+            localStorage.setItem('bkson_ceo_img', document.getElementById('inputCeoImg').value);
+            localStorage.setItem('bkson_brand_title', document.getElementById('inputBrandTitle').value);
+            localStorage.setItem('bkson_ceo_bio', document.getElementById('inputCeoBio').value);
+            localStorage.setItem('bkson_fura_banner', document.getElementById('inputFuraBanner').value);
+
+            alert('✅ Success! Profile settings updated successfully.');
+        }
+
+        // --- DRINKS SCHEDULE MANAGEMENT FUNCTIONS ---
+        function getStoredProducts() {
+            let saved = localStorage.getItem('bkson_admin_products');
+            if (saved) {
+                return JSON.parse(saved);
+            }
+            // Default initial items
+            return [
+                { name: "Pop Cola Drink", price: 250 },
+                { name: "Coca Cola / Chilled Soft Drink", price: 500 },
+                { name: "BKSON Standard Fura Yogurt", price: 1000 },
+                { name: "Exotic / Premium Large Pack", price: 1500 }
+            ];
+        }
+
+        function loadAdminProducts() {
+            let listContainer = document.getElementById('adminProductList');
+            listContainer.innerHTML = "";
+            let products = getStoredProducts();
+
+            if (products.length === 0) {
+                listContainer.innerHTML = "<p style='color: #777; font-size: 0.9rem;'>No drinks currently active in schedule.</p>";
+                return;
+            }
+
+            products.forEach((item, index) => {
+                let card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div>
+                        <strong>${item.name}</strong><br>
+                        <span style="color: #27ae60; font-weight: bold; font-size: 0.9rem;">₦${item.price.toLocaleString()}</span>
+                    </div>
+                    <button class="delete-btn" onclick="deleteProduct(${index})"><i class="fas fa-trash"></i> Remove</button>
+                `;
+                listContainer.appendChild(card);
+            });
+        }
+
+        function addNewProduct() {
+            let nameInput = document.getElementById('newDrinkName');
+            let priceInput = document.getElementById('newDrinkPrice');
+
+            let name = nameInput.value.trim();
+            let price = parseFloat(priceInput.value);
+
+            if (!name || isNaN(price) || price <= 0) {
+                alert("Please enter a valid drink name and price!");
+                return;
+            }
+
+            let products = getStoredProducts();
+            products.push({ name: name, price: price });
+            localStorage.setItem('bkson_admin_products', JSON.stringify(products));
+
+            // Clear inputs and refresh list
+            nameInput.value = "";
+            priceInput.value = "";
+            loadAdminProducts();
+            alert("✅ Drink successfully added to the Price Guide schedule!");
+        }
+
+        function deleteProduct(index) {
+            let products = getStoredProducts();
+            let removedItem = products.splice(index, 1);
+            localStorage.setItem('bkson_admin_products', JSON.stringify(products));
+            loadAdminProducts();
+            alert(`🗑️ "${removedItem[0].name}" has been removed from the available schedule.`);
+        }
+    </script>
+</body>
+</html>
