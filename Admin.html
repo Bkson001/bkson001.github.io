@@ -286,11 +286,13 @@
             if (saved) {
                 return JSON.parse(saved);
             }
-            // Default initial items
+            // Default initial items matching your store catalog
             return [
-                { name: "Pop Cola Drink", price: 250 },
-                { name: "Coca Cola / Chilled Soft Drink", price: 500 },
                 { name: "BKSON Standard Fura Yogurt", price: 1000 },
+                { name: "Coca Cola / Chilled Soft Drink", price: 500 },
+                { name: "Pop Cola Drink", price: 250 },
+                { name: "Fanta", price: 500 },
+                { name: "Zobo", price: 1500 },
                 { name: "Exotic / Premium Large Pack", price: 1500 }
             ];
         }
