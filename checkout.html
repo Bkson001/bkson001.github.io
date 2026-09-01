@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛒 BKSON Order & Secure Pay</title>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -134,7 +135,8 @@
 <body>
 
     <div class="container">
-        <h2>🛒 BKSON Order & Secure Pay</h2>
+        <h2>🛒 BKSON FURA AND DRINKS SERVICES</h2>
+        <P Order & Secure Pay, Delivery on time</p>
         <p style="text-align: center; color: #666; font-size: 0.85rem; margin-bottom: 15px;">Select your branch, pick from our available list, and pay securely.</p>
 
         <div class="paystack-box">
@@ -147,9 +149,9 @@
                 <label>Select Branch Location</label>
                 <select id="branchSelect" required>
                     <option value="malam-madori">BKSON Malam Madori (Jigawa HQ)</option>
-                    <option value="hadejia">BKSON Hadejia Branch (Jigawa)</option>
-                    <option value="dutse">BKSON Dutse Branch (Jigawa)</option>
-                    <option value="kano">BKSON Kano Branch</option>
+                    <option value="hadejia">BKSON Hadejia Branch (Jigawa) upcoming</option>
+                    <option value="dutse">BKSON Dutse Branch (Jigawa) upcoming</option>
+                    <option value="kano">BKSON Kano Branch upcoming</option>
                 </select>
             </div>
 
@@ -166,7 +168,7 @@
 
             <div class="form-group">
                 <label>Your Full Name</label>
-                <input type="text" id="custName" placeholder="e.g. Ibrahim Malam" required>
+                <input type="text" id="custName" placeholder="e.g. Muhammad Abubakar" required>
             </div>
 
             <div class="form-group">
@@ -394,22 +396,59 @@
             let deliveryTimeText = "";
 
             if (branch === 'hadejia') {
-                branchTitleText = "BKSON FURA & DRINKS - HADEJIA BRANCH";
-                footerAddressText = "Hadejia Branch, Jigawa State, Nigeria<br>Phone: 2348165836740 | Email: bksonfurayogurt@gmail.com | www.bkson001.github.io";
-                deliveryTimeText = "Within 30 - 45 Minutes (Hadejia Dispatch)";
+                branchTitleText = "BKSON FURA & DRINKS SERVICES - HADEJIA BRANCH UPCOMING...";
+                footerAddressText = "Hadejia Branch COMING SOON, Jigawa State, Nigeria<br>Phone: 2348165836740 | Email: bksonfurayogurt@gmail.com | www.bkson001.github.io";
+                deliveryTimeText = "Defend on your distance🥰";
             } else if (branch === 'dutse') {
-                branchTitleText = "BKSON FURA & DRINKS - DUTSE BRANCH";
-                footerAddressText = "Dutse Metropolis Branch, Jigawa State, Nigeria<br>Phone: 2348165836740 | Email: bksonfurayogurt@gmail.com | www.bkson001.github.io";
-                deliveryTimeText = "Within 30 - 45 Minutes (Dutse Dispatch)";
+                branchTitleText = "BKSON FURA & DRINKS SERVICES - DUTSE BRANCH UPCOMING...";
+                footerAddressText = "Dutse Branch COMING SOON, Jigawa State, Nigeria<br>Phone: 2348165836740 | Email: bksonfurayogurt@gmail.com | www.bkson001.github.io";
+                deliveryTimeText = "Defend on your distance🥰";
             } else if (branch === 'kano') {
-                branchTitleText = "BKSON FURA & DRINKS - KANO BRANCH";
-                footerAddressText = "Kano Metropolis Branch, Kano State, Nigeria<br>Phone: 2348165836740 | Email: bksonfurayogurt@gmail.com | www.bkson001.github.io";
-                deliveryTimeText = "Within 45 - 60 Minutes (Kano Dispatch)";
+                branchTitleText = "BKSON FURA & DRINKS SERVICES - KANO BRANCH UPCOMING...";
+                footerAddressText = "Kano Branch COMING SOON, Kano State, Nigeria<br>Phone: 2348165836740 | Email: bksonfurayogurt@gmail.com | www.bkson001.github.io";
+                deliveryTimeText = "Defend on your distance🥰";
             } else {
-                branchTitleText = "BKSON FURA & DRINKS - MALAM MADORI HQ";
+                branchTitleText = "BKSON FURA & DRINKS SERVICES - MALAM MADORI BRANCH";
                 footerAddressText = "Layin Y'an Rake Beside Airtel Service Abuja Quaters Malam Madori Jigawa Nigeria<br>Phone: 2348165836740 | Email: bksonfurayogurt@gmail.com | www.bkson001.github.io";
-                deliveryTimeText = "Within 30 - 45 Minutes (Malam Madori)";
+                deliveryTimeText = "Defend on your distance🥰";
             }
+            // Prompt for email (or you can create an email input field in your form)
+    let customerEmail = prompt("bksonfurayogurt@gmail.com");
+    if (!customerEmail) return;
+
+    // Trigger Paystack Popup Payment
+    let handler = PaystackPop.setup({
+        key: 'pk_test_eecb73782581962d453200851b3e906e7e698860', // Your exact Test Public Key
+        email: customerEmail,
+        amount: grandTotal * 100, // Converts Naira to Kobo
+        currency: 'NGN',
+        ref: 'BKSON_' + Math.floor(1000 + Math.random() * 9000),
+        callback: function(response) {
+            // --- THIS RUNS ONLY AFTER SUCCESSFUL PAYMENT ---
+            alert('Payment successful! Reference: ' + response.reference);
+
+            // Now populate your receipt details
+            document.getElementById('recBranchTitle').innerText = branchTitleText;
+            document.getElementById('recNo').innerText = randomId;
+            document.getElementById('recName').innerText = name;
+            document.getElementById('recPhone').innerText = phone;
+            document.getElementById('recAddress').innerText = address;
+            document.getElementById('recDate').innerText = today;
+            document.getElementById('recTableBody').innerHTML = recTableHtml;
+            document.getElementById('recSubtotal').innerText = '₦' + grandTotal.toLocaleString();
+            document.getElementById('recTotal').innerText = '₦' + grandTotal.toLocaleString();
+            document.getElementById('recTime').innerText = deliveryTimeText;
+            document.getElementById('recFooterAddress').innerHTML = footerAddressText;
+
+            // Hide form and show receipt
+            document.getElementById('orderForm').style.display = 'none';
+            document.getElementById('receiptSection').style.display = 'block';
+        },
+        onClose: function() {
+            alert('Transaction was cancelled.');
+        }
+    });
+    handler.openIframe();
 
             document.getElementById('recBranchTitle').innerText = branchTitleText;
             document.getElementById('recNo').innerText = randomId;
