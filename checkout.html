@@ -136,7 +136,7 @@
 
     <div class="container">
         <h2>🛒 BKSON FURA AND DRINKS SERVICES</h2>   
-         <p style="text-align: center; color: #666; font-size: 0.9rem;">Sip The Freshness, Taste The Quality</p>
+        <p style="text-align: center; color: #666; font-size: 0.9rem;">Sip The Freshness, Taste The Quality</p>
         <p style="text-align: center; color: #666; font-size: 0.9rem;">Order & Secure Pay, Delivery on time</p>
         <p style="text-align: center; color: #666; font-size: 0.85rem; margin-bottom: 15px;">Select your branch, pick from our available list, and pay securely.</p>
 
@@ -227,6 +227,8 @@
             <div class="receipt-top-banner">
                 <div>
                     <h3>Delivery Receipt</h3>
+                    <!-- Added Line 139 Slogan Here -->
+                    <p style="margin: 2px 0 0 0; font-size: 0.7rem; color: #e0f4ff;">Sip The Freshness, Taste The Quality</p>
                     <p id="recBranchTitle" style="margin: 2px 0 0 0; font-size: 0.75rem; color: #e0f4ff;">BKSON FURA & DRINKS SERVICES</p>
                 </div>
                 <img src="Company-logo.png" alt="BKSON Logo" class="receipt-logo">
@@ -421,17 +423,14 @@
 
             // Trigger Paystack Popup Payment
             let handler = PaystackPop.setup({
-                key: 'pk_test_eecb73782581962d453200851b3e906e7e698860', // Your Test Public Key
+                key: 'pk_test_eecb73782581962d453200851b3e906e7e698860',
                 email: email,
-                amount: grandTotal * 100, // Converts Naira to Kobo
+                amount: grandTotal * 100,
                 currency: 'NGN',
                 ref: 'BKSON_' + Math.floor(1000 + Math.random() * 9000),
                 callback: function(response) {
-                    // --- SUCCESSFUL PAYMENT CALLBACK ---
-                    // response.reference captures the exact Paystack reference hash
-                    
                     document.getElementById('recBranchTitle').innerText = branchTitleText;
-                    document.getElementById('recNo').innerText = response.reference; // Matches dashboard & email 100%
+                    document.getElementById('recNo').innerText = response.reference;
                     document.getElementById('recName').innerText = name;
                     document.getElementById('recPhone').innerText = phone;
                     document.getElementById('recAddress').innerText = address;
@@ -442,7 +441,6 @@
                     document.getElementById('recTime').innerText = deliveryTimeText;
                     document.getElementById('recFooterAddress').innerHTML = footerAddressText;
 
-                    // Hide form and show receipt
                     document.getElementById('orderForm').style.display = 'none';
                     document.getElementById('receiptSection').style.display = 'block';
                 },
@@ -454,4 +452,4 @@
         }
     </script>
 </body>
-                                                                                 </html>
+</html>
