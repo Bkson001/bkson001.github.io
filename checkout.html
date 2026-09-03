@@ -138,10 +138,10 @@
         <h2>🛒 BKSON FURA AND DRINKS SERVICES</h2>   
         <p style="text-align: center; color: #666; font-size: 0.82rem; margin: 0 0 2px 0; font-weight: bold;">Sip The Freshness, Taste The Quality</p>
         <p style="text-align: center; color: #666; font-size: 0.85rem; margin: 0 0 2px 0;">Order & Secure Pay, Delivery on time</p>
-        <p style="text-align: center; color: #666; font-size: 0.80rem; margin-bottom: 15px;">Select your branch, pick from our available list, and pay securely.</p>
+        <p style="text-align: center; color: #666; font-size: 0.80rem; margin-bottom: 15px;">Fill your details, pick from our available list, and pay securely via Paystack.</p>
 
         <div class="paystack-box">
-            <i class="fas fa-shield-alt"></i> <strong>Paystack Secure Checkout Active:</strong> Direct merchant payment integration.
+            <i class="fas fa-shield-alt"></i> <strong>Paystack Secure Checkout Active:</strong> Email is captured from your input below to pass directly to Paystack and trigger your transaction confirmation receipt.
         </div>
 
         <form id="orderForm" onsubmit="processOrder(event)">
@@ -156,24 +156,13 @@
                 </select>
             </div>
 
-            <div class="guide-btn" onclick="openMenuModal()">
-                📋 Click to View Available Drinks & Price Guide
-            </div>
-
-            <div class="form-group">
-                <label>Selected Product-List Summary</label>
-                <div id="selectedSummaryDisplay" style="padding: 12px; background: #eaf6fc; border: 1px solid #bce3f7; border-radius: 8px; font-size: 0.9rem; min-height: 45px; color: #003366;">
-                    <em>No items selected yet. Click guide above.</em>
-                </div>
-            </div>
-
             <div class="form-group">
                 <label>Your Full Name</label>
                 <input type="text" id="custName" placeholder="e.g. Muhammad Abubakar" required>
             </div>
 
             <div class="form-group">
-                <label>Email Address (For Paystack Receipt)</label>
+                <label>Email Address (Required for Paystack Receipt Email)</label>
                 <input type="email" id="custEmail" placeholder="e.g. user@gmail.com" required>
             </div>
 
@@ -185,6 +174,17 @@
             <div class="form-group">
                 <label>Delivery Address / Street</label>
                 <input type="text" id="custAddress" placeholder="e.g. Abuja Quaters / Zoo Road" required>
+            </div>
+
+            <div class="guide-btn" onclick="openMenuModal()">
+                📋 Click to View Available Drinks & Price Guide
+            </div>
+
+            <div class="form-group">
+                <label>Selected Product-List Summary</label>
+                <div id="selectedSummaryDisplay" style="padding: 12px; background: #eaf6fc; border: 1px solid #bce3f7; border-radius: 8px; font-size: 0.9rem; min-height: 45px; color: #003366;">
+                    <em>No items selected yet. Click guide above.</em>
+                </div>
             </div>
 
             <div style="background: #f0faff; padding: 12px; border-radius: 8px; text-align: center; margin-bottom: 15px;">
@@ -416,7 +416,7 @@
                 deliveryTimeText = "Defend on your distance🥰";
             }
 
-            // Trigger Paystack Popup Payment
+            // Trigger Paystack Popup Payment with customer's entered email
             let handler = PaystackPop.setup({
                 key: 'pk_test_eecb73782581962d453200851b3e906e7e698860',
                 email: email,
@@ -447,4 +447,4 @@
         }
     </script>
 </body>
-</html>
+    </html>
