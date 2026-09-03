@@ -128,12 +128,15 @@
             return;
         }
 
+        // GENERATE YOUR UNIFIED REFERENCE HERE FIRST
+        var uniqueRef = 'BKSON_' + Math.floor((Math.random() * 900000) + 100000);
+
         var handler = PaystackPop.setup({
             key: 'pk_test_eecb73782581962d453200851b3e906e7e698860', // <-- Replace with your actual Paystack Public Key
             email: email,
             amount: amountValue * 100, 
             currency: 'NGN',
-            ref: 'BKSON_' + Math.floor((Math.random() * 1000000) + 1),
+            ref: uniqueRef, // <-- Pass your custom reference to Paystack here
             metadata: {
                 custom_fields: [
                     { display_name: "Customer Name", variable_name: "customer_name", value: name },
@@ -146,11 +149,11 @@
                 document.getElementById('form-section').style.display = 'none';
                 document.getElementById('receipt-section').style.display = 'block';
 
-                // CRITICAL: This pulls the exact Paystack reference and prints it on the receipt
+                // Display your uniqueRef on the receipt so it matches what was sent to Paystack
                 document.getElementById('r-name').innerText = name;
                 document.getElementById('r-phone').innerText = phone;
                 document.getElementById('r-address').innerText = address;
-                document.getElementById('r-receiptNo').innerText = response.reference;
+                document.getElementById('r-receiptNo').innerText = uniqueRef; // Matches your generated ref
                 document.getElementById('r-date').innerText = new Date().toLocaleString();
                 document.getElementById('r-total').innerText = '₦' + amountValue.toLocaleString();
 
@@ -171,6 +174,5 @@
         handler.openIframe();
     }
 </script>
-
 </body>
 </html>
