@@ -141,15 +141,22 @@
                 ]
             },
             callback: function(response) {
+                // Debug to check what Paystack sends back
+                console.log("Paystack response:", response);
+
                 // Hide form and show receipt section
                 document.getElementById('form-section').style.display = 'none';
                 document.getElementById('receipt-section').style.display = 'block';
 
-                // CRITICAL: We use response.reference here so it matches Paystack's email and dashboard 100%
+                // Fill text details safely
                 document.getElementById('r-name').innerText = name;
                 document.getElementById('r-phone').innerText = phone;
                 document.getElementById('r-address').innerText = address;
-                document.getElementById('r-receiptNo').innerText = response.reference; 
+                
+                // FORCE the response reference to appear, with a fallback just in case
+                var finalRef = response && response.reference ? response.reference : "BKSON_PENDING";
+                document.getElementById('r-receiptNo').innerText = finalRef;
+                
                 document.getElementById('r-date').innerText = new Date().toLocaleString();
                 document.getElementById('r-total').innerText = '₦' + amountValue.toLocaleString();
 
