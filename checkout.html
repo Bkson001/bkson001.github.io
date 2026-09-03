@@ -115,7 +115,7 @@
             display: flex; justify-content: space-between; align-items: center;
             border-radius: 6px; margin-bottom: 20px;
         }
-        .receipt-top-banner h3 { margin: 0; font-size: 1.4rem; letter-spacing: 1px; color: white; }
+        .receipt-top-banner h3 { margin: 0; font-size: 1.3rem; letter-spacing: 0.5px; color: white; line-height: 1.1; }
         .receipt-logo { width: 50px; height: 50px; border-radius: 8px; object-fit: cover; border: 2px solid white; background: white; }
         .section-header-bar { background: #87CEEB; color: #003366; padding: 6px 12px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; margin-bottom: 12px; }
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; font-size: 0.9rem; }
@@ -200,7 +200,7 @@
             <div class="modal-content">
                 <span class="close-modal" onclick="closeMenuModal()">&times;</span>
                 <h3 style="color: #003366; margin-top: 0; font-size: 1.1rem; text-align: center;">Available Drinks & Price Guide</h3>
-                <p style="font-size: 0.8rem; color: #666; text-align: center;">Select items and set quantities from your choices:</p>
+                <p style="font-size: 0.80rem; color: #666; text-align: center;">Select items and set quantities from your choices:</p>
                 
                 <div class="table-scroll-container">
                     <table class="menu-table">
@@ -226,10 +226,10 @@
         <div id="receiptSection">
             <div class="receipt-top-banner">
                 <div>
+                    <!-- Slogan placed directly under Delivery Receipt title with 0px spacing -->
                     <h3>Delivery Receipt</h3>
-                    <!-- Added Line 139 Slogan Here -->
-                    <p style="margin: 2px 0 0 0; font-size: 0.7rem; color: #e0f4ff;">Sip The Freshness, Taste The Quality</p>
-                    <p id="recBranchTitle" style="margin: 2px 0 0 0; font-size: 0.75rem; color: #e0f4ff;">BKSON FURA & DRINKS SERVICES</p>
+                    <p style="margin: 2px 0 0 0; font-size: 0.7rem; color: #87CEEB; font-weight: bold; letter-spacing: 0.5px;">Sip The Freshness, Taste The Quality</p>
+                    <p id="recBranchTitle" style="margin: 6px 0 0 0; font-size: 0.75rem; color: #e0f4ff; text-transform: uppercase;">BKSON FURA & DRINKS SERVICES</p>
                 </div>
                 <img src="Company-logo.png" alt="BKSON Logo" class="receipt-logo">
             </div>
