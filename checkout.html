@@ -136,7 +136,7 @@
 
     <div class="container">
         <h2>🛒 BKSON FURA AND DRINKS SERVICES</h2>   
-        <P> Order & Secure Pay, Delivery on time</p>
+        <p style="text-align: center; color: #666; font-size: 0.9rem;">Order & Secure Pay, Delivery on time</p>
         <p style="text-align: center; color: #666; font-size: 0.85rem; margin-bottom: 15px;">Select your branch, pick from our available list, and pay securely.</p>
 
         <div class="paystack-box">
@@ -169,6 +169,11 @@
             <div class="form-group">
                 <label>Your Full Name</label>
                 <input type="text" id="custName" placeholder="e.g. Muhammad Abubakar" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email Address (For Paystack Receipt)</label>
+                <input type="email" id="custEmail" placeholder="e.g. user@gmail.com" required>
             </div>
 
             <div class="form-group">
@@ -234,9 +239,9 @@
                     <div class="info-row"><span><strong>Address:</strong></span> <span id="recAddress">-</span></div>
                 </div>
                 <div>
-                    <div class="info-row"><span><strong>Receipt No:</strong></span> <span id="recNo">BK-001</span></div>
+                    <div class="info-row"><span><strong>Receipt Ref:</strong></span> <span id="recNo" style="font-family: monospace; color: #003366; font-weight: bold;">-</span></div>
                     <div class="info-row"><span><strong>Delivery Date:</strong></span> <span id="recDate">-</span></div>
-                    <div class="info-row"><span><strong>Gateway:</strong></span> <span style="color: #27ae60; font-weight: bold;">Paystack Verified</span></div>
+                    <div class="info-row"><span><strong>Gateway:</strong></span> <span style="color: #27ae60; font-weight: bold;">Paystack Verified ✓</span></div>
                 </div>
             </div>
 
@@ -269,7 +274,7 @@
             </div>
 
             <div id="recFooterAddress" class="receipt-footer-banner"></div>
-            <button onclick="window.print()" style="background: #003366; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; margin-top: 20px; cursor: pointer; font-weight: bold;">🖨️ Print / Save Receipt</button>
+            <button onclick="window.print()" style="background: #003366; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; margin-top: 20px; cursor: pointer; font-weight: bold;">🖨️ Print / Save Official PDF Receipt</button>
         </div>
 
         <a href="index.html" class="back-link">← Return to Homepage</a>
@@ -298,7 +303,7 @@
             tableBody.innerHTML = "";
             const products = getProducts();
 
-            products.forEach((item, index) => {
+            products.forEach((item) => {
                 let isChecked = selectedItemsCache.some(i => i.name === item.name);
                 let currentQty = isChecked ? selectedItemsCache.find(i => i.name === item.name).qty : 1;
 
@@ -369,6 +374,7 @@
 
             const branch = document.getElementById('branchSelect').value;
             const name = document.getElementById('custName').value;
+            const email = document.getElementById('custEmail').value;
             const phone = document.getElementById('custPhone').value;
             const address = document.getElementById('custAddress').value;
 
@@ -388,7 +394,6 @@
                 `;
             });
 
-            const randomId = 'BK-' + Math.floor(1000 + Math.random() * 9000);
             const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
             
             let branchTitleText = "";
@@ -412,59 +417,40 @@
                 footerAddressText = "Layin Y'an Rake Beside Airtel Service Abuja Quaters Malam Madori Jigawa Nigeria<br>Phone: 2348165836740 | Email: bksonfurayogurt@gmail.com | www.bkson001.github.io";
                 deliveryTimeText = "Defend on your distance🥰";
             }
-            // Prompt for email (or you can create an email input field in your form)
-    let customerEmail = prompt("Please enter your email address for your Paystack receipt");
-    if (!customerEmail) return;
 
-    // Trigger Paystack Popup Payment
-    let handler = PaystackPop.setup({
-        key: 'pk_test_eecb73782581962d453200851b3e906e7e698860', // Your exact Test Public Key
-        email: customerEmail,
-        amount: grandTotal * 100, // Converts Naira to Kobo
-        currency: 'NGN',
-        ref: 'BKSON_' + Math.floor(1000 + Math.random() * 9000),
-        callback: function(response) {
-            // --- THIS RUNS ONLY AFTER SUCCESSFUL PAYMENT ---
-            alert('Payment successful! Reference: ' + response.reference);
+            // Trigger Paystack Popup Payment
+            let handler = PaystackPop.setup({
+                key: 'pk_test_eecb73782581962d453200851b3e906e7e698860', // Your Test Public Key
+                email: email,
+                amount: grandTotal * 100, // Converts Naira to Kobo
+                currency: 'NGN',
+                ref: 'BKSON_' + Math.floor(1000 + Math.random() * 9000),
+                callback: function(response) {
+                    // --- SUCCESSFUL PAYMENT CALLBACK ---
+                    // response.reference captures the exact Paystack reference hash
+                    
+                    document.getElementById('recBranchTitle').innerText = branchTitleText;
+                    document.getElementById('recNo').innerText = response.reference; // Matches dashboard & email 100%
+                    document.getElementById('recName').innerText = name;
+                    document.getElementById('recPhone').innerText = phone;
+                    document.getElementById('recAddress').innerText = address;
+                    document.getElementById('recDate').innerText = today;
+                    document.getElementById('recTableBody').innerHTML = recTableHtml;
+                    document.getElementById('recSubtotal').innerText = '₦' + grandTotal.toLocaleString();
+                    document.getElementById('recTotal').innerText = '₦' + grandTotal.toLocaleString();
+                    document.getElementById('recTime').innerText = deliveryTimeText;
+                    document.getElementById('recFooterAddress').innerHTML = footerAddressText;
 
-            // Now populate your receipt details
-            document.getElementById('recBranchTitle').innerText = branchTitleText;
-            document.getElementById('recNo').innerText = randomId;
-            document.getElementById('recName').innerText = name;
-            document.getElementById('recPhone').innerText = phone;
-            document.getElementById('recAddress').innerText = address;
-            document.getElementById('recDate').innerText = today;
-            document.getElementById('recTableBody').innerHTML = recTableHtml;
-            document.getElementById('recSubtotal').innerText = '₦' + grandTotal.toLocaleString();
-            document.getElementById('recTotal').innerText = '₦' + grandTotal.toLocaleString();
-            document.getElementById('recTime').innerText = deliveryTimeText;
-            document.getElementById('recFooterAddress').innerHTML = footerAddressText;
-
-            // Hide form and show receipt
-            document.getElementById('orderForm').style.display = 'none';
-            document.getElementById('receiptSection').style.display = 'block';
-        },
-        onClose: function() {
-            alert('Transaction was cancelled.');
-        }
-    });
-    handler.openIframe();
-
-            document.getElementById('recBranchTitle').innerText = branchTitleText;
-            document.getElementById('recNo').innerText = randomId;
-            document.getElementById('recName').innerText = name;
-            document.getElementById('recPhone').innerText = phone;
-            document.getElementById('recAddress').innerText = address;
-            document.getElementById('recDate').innerText = today;
-            document.getElementById('recTableBody').innerHTML = recTableHtml;
-            document.getElementById('recSubtotal').innerText = '₦' + grandTotal.toLocaleString();
-            document.getElementById('recTotal').innerText = '₦' + grandTotal.toLocaleString();
-            document.getElementById('recTime').innerText = deliveryTimeText;
-            document.getElementById('recFooterAddress').innerHTML = footerAddressText;
-
-            document.getElementById('orderForm').style.display = 'none';
-            document.getElementById('receiptSection').style.display = 'block';
+                    // Hide form and show receipt
+                    document.getElementById('orderForm').style.display = 'none';
+                    document.getElementById('receiptSection').style.display = 'block';
+                },
+                onClose: function() {
+                    alert('Transaction was cancelled.');
+                }
+            });
+            handler.openIframe();
         }
     </script>
 </body>
-    </html>
+                                                                                 </html>
