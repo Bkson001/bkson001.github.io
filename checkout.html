@@ -423,6 +423,28 @@
                 currency: 'NGN',
                 ref: 'BKSON_' + Math.floor(1000 + Math.random() * 9000),
                 callback: function(response) {
+                    // Automatically package and send data to Make.com Webhook upon successful payment
+                    let orderData = {
+                        timestamp: new Date().toISOString(),
+                        reference: response.reference,
+                        branch: branch,
+                        customerName: name,
+                        email: email,
+                        phone: phone,
+                        address: address,
+                        orderSummary: selectedItemsCache.map(i => `${i.name} (${i.qty}x)`).join(', '),
+                        totalAmount: grandTotal
+                    };
+
+                    fetch('https://hook.eu1.make.com/rm93xxnodbywt1arf24yow6syc3jzbfa', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(orderData)
+                    }).catch(error => console.error('Webhook trigger error:', error));
+
+                    // Populate Receipt UI
                     document.getElementById('recBranchTitle').innerText = branchTitleText;
                     document.getElementById('recNo').innerText = response.reference;
                     document.getElementById('recName').innerText = name;
