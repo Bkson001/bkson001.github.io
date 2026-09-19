@@ -46,8 +46,7 @@
         .business-logo { width: 45px; height: 45px; border-radius: 10px; margin-right: 12px; object-fit: cover; }
         .brand-text h1 { font-size: 20px; margin: 0; letter-spacing: 1px; }
         .brand-text p { font-size: 6px; margin: 0; font-weight: bold; color: #777; }
-        .brand-text p2 { font-size: 6px; margin: 0; font-weight: bold; color: #777; }
-       
+        
       /* CEO IMAGE */
        .hero { 
             padding: 50px 20px; 
@@ -158,13 +157,7 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // 1. Update Logo Photo if changed
-    const savedLogo = localStorage.getItem('bkson_logo_img');
-    if (savedLogo) {
-        const logoElement = document.querySelector('.business-logo');
-        if (logoElement) logoElement.src = savedLogo;
-    }
-
+    
     // 2. Update CEO Photo if changed
     const savedCeoImg = localStorage.getItem('bkson_ceo_img');
     if (savedCeoImg) {
@@ -226,11 +219,7 @@ document.addEventListener("DOMContentLoaded", function() {
               
             </div>
         </div>
-        <!-- Change Logo Button Right Underneath Logo -->
-        <div class="change-photo-container" style="margin: 4px 0 0 0;">
-            <button class="change-photo-btn" onclick="promptChangePhoto('bkson_logo_img', 'business-logo')">📷</button>
-            <input type="file" id="file_bkson_logo_img" style="display: none;" accept="image/*" onchange="uploadNewPhoto(event, 'bkson_logo_img', 'business-logo')">
-        </div>
+        
     </div>
 
     <div style="display: flex; align-items: center; gap: 0px;">
